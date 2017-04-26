@@ -15,7 +15,7 @@ class AllVehiclesI: NSObject {
     public var vehicleType: String?
     public var vehicleName: String?
     public var vehicleNo: String?
-    public var serviceRequiredAfter: Int
+    public var serviceRequiredAfter: Int?
     public var averageRun: Int?
     public var lastServiceDate: Date?
     public var notes: String?
@@ -27,8 +27,8 @@ class AllVehiclesI: NSObject {
         self.vehicleType = ""
         self.vehicleName = ""
         self.vehicleNo = ""
-        self.serviceRequiredAfter = 0
-        self.averageRun = 0
+//        self.serviceRequiredAfter = 0
+//        self.averageRun = 0
         self.notes = ""
     }
 }

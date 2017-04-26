@@ -78,9 +78,9 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
     
     func getServiceDueDate() -> String {
         
-        let averageDayRun  = Float(objVehicle.serviceRequiredAfter)/Float(objVehicle.averageRun!)
+        let averageDayRun  = Float(objVehicle.serviceRequiredAfter!)/Float(objVehicle.averageRun!)
         
-        let noOfDays = Float(objVehicle.serviceRequiredAfter)/averageDayRun
+        let noOfDays = Float(objVehicle.serviceRequiredAfter!)/averageDayRun
         
         let currentCalendar = NSCalendar.current
         
@@ -163,21 +163,26 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "AddVehicleCell", for: indexPath) as! AddVehicleCell
         
-        let ov = objVehicle
         
-        cell.txtVehicleName.text = ov.vehicleName!
-        cell.txtVehicleType.text = ov.vehicleType!
-        cell.txtServiceRequired.text = ov.serviceRequiredAfter.description
+        cell.txtVehicleName.text = objVehicle.vehicleName!
+        cell.txtVehicleType.text = objVehicle.vehicleType!
         
+        if(objVehicle.serviceRequiredAfter != nil)
+        {
+        cell.txtServiceRequired.text = objVehicle.serviceRequiredAfter!.description
+        }
         if(dtLastService != nil)
         {
         let srtDate = AppSharedInstance.sharedInstance.getFormattedStr(formatterType: AppSharedInstance.sharedInstance.myDateFormatter, dateObj: dtLastService!)
         cell.txtLastServiceDate.text = srtDate
         }
         
-        cell.txtWeeklyRun.text = ov.averageRun!.description
-        cell.txtVehicleNo.text = ov.vehicleNo!
-        cell.txtNotes.text = ov.notes
+        if(objVehicle.averageRun != nil)
+        {
+        cell.txtWeeklyRun.text = objVehicle.averageRun!.description
+        }
+        cell.txtVehicleNo.text = objVehicle.vehicleNo!
+        cell.txtNotes.text = objVehicle.notes
         
         return cell
         

@@ -21,7 +21,7 @@ class DatabaseManager: NSObject {
         vehicleEntity.vehicleID = objVehicle.vehicleID
         vehicleEntity.vehicleName = objVehicle.vehicleName
         vehicleEntity.vehicleType = objVehicle.vehicleType
-        vehicleEntity.serviceRequiredAfter = Int32(objVehicle.serviceRequiredAfter)
+        vehicleEntity.serviceRequiredAfter = Int32(objVehicle.serviceRequiredAfter!)
         vehicleEntity.lastServiceDate = objVehicle.lastServiceDate as NSDate?
         vehicleEntity.serviceDueDate = objVehicle.serviceDueDate as NSDate?
         vehicleEntity.averageRun = Int16((objVehicle.averageRun! as Int?)!)
