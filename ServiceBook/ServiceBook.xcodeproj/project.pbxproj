@@ -13,6 +13,22 @@
 		18E10DBB1EB0C3B5000B5343 /* ServiceBook.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18E10DB91EB0C3B5000B5343 /* ServiceBook.xcdatamodeld */; };
 		18E10DBD1EB0C3B5000B5343 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18E10DBC1EB0C3B5000B5343 /* Assets.xcassets */; };
 		18E10DC01EB0C3B5000B5343 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18E10DBE1EB0C3B5000B5343 /* LaunchScreen.storyboard */; };
+		18E10E3B1EB0C502000B5343 /* Vehicle+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E10DC81EB0C502000B5343 /* Vehicle+CoreDataClass.swift */; };
+		18E10E3C1EB0C502000B5343 /* Vehicle+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E10DC91EB0C502000B5343 /* Vehicle+CoreDataProperties.swift */; };
+		18E10E3D1EB0C502000B5343 /* AllVehiclesI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E10DCB1EB0C502000B5343 /* AllVehiclesI.swift */; };
+		18E10E3E1EB0C502000B5343 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E10DCE1EB0C502000B5343 /* AuthenticationManager.swift */; };
+		18E10E3F1EB0C502000B5343 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E10DD01EB0C502000B5343 /* DatabaseManager.swift */; };
+		18E10E401EB0C502000B5343 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E10DD21EB0C502000B5343 /* ModelManager.swift */; };
+		18E10E411EB0C502000B5343 /* VehicleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E10DD41EB0C502000B5343 /* VehicleManager.swift */; };
+		18E10E421EB0C502000B5343 /* AddVehiclePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E10DD61EB0C502000B5343 /* AddVehiclePresenter.swift */; };
+		18E10E431EB0C502000B5343 /* AppSharedInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E10DD81EB0C502000B5343 /* AppSharedInstance.swift */; };
+		18E10E471EB0C502000B5343 /* AllVehiclesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E10E341EB0C502000B5343 /* AllVehiclesCell.swift */; };
+		18E10E481EB0C502000B5343 /* AllVehiclesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E10E351EB0C502000B5343 /* AllVehiclesVC.swift */; };
+		18E10E491EB0C502000B5343 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E10E371EB0C502000B5343 /* LoginVC.swift */; };
+		18E10E4A1EB0C502000B5343 /* VehicleDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E10E391EB0C502000B5343 /* VehicleDetailCell.swift */; };
+		18E10E4B1EB0C502000B5343 /* VehicleDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E10E3A1EB0C502000B5343 /* VehicleDetailVC.swift */; };
+		18E10E4F1EB0C5E2000B5343 /* AddVehicleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E10E4D1EB0C5E2000B5343 /* AddVehicleCell.swift */; };
+		18E10E501EB0C5E2000B5343 /* AddVehicleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E10E4E1EB0C5E2000B5343 /* AddVehicleVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +40,22 @@
 		18E10DBC1EB0C3B5000B5343 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18E10DBF1EB0C3B5000B5343 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18E10DC11EB0C3B5000B5343 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18E10DC81EB0C502000B5343 /* Vehicle+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Vehicle+CoreDataClass.swift"; sourceTree = "<group>"; };
+		18E10DC91EB0C502000B5343 /* Vehicle+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Vehicle+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		18E10DCB1EB0C502000B5343 /* AllVehiclesI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllVehiclesI.swift; sourceTree = "<group>"; };
+		18E10DCE1EB0C502000B5343 /* AuthenticationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		18E10DD01EB0C502000B5343 /* DatabaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		18E10DD21EB0C502000B5343 /* ModelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
+		18E10DD41EB0C502000B5343 /* VehicleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleManager.swift; sourceTree = "<group>"; };
+		18E10DD61EB0C502000B5343 /* AddVehiclePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddVehiclePresenter.swift; sourceTree = "<group>"; };
+		18E10DD81EB0C502000B5343 /* AppSharedInstance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSharedInstance.swift; sourceTree = "<group>"; };
+		18E10E341EB0C502000B5343 /* AllVehiclesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllVehiclesCell.swift; sourceTree = "<group>"; };
+		18E10E351EB0C502000B5343 /* AllVehiclesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllVehiclesVC.swift; sourceTree = "<group>"; };
+		18E10E371EB0C502000B5343 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		18E10E391EB0C502000B5343 /* VehicleDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleDetailCell.swift; sourceTree = "<group>"; };
+		18E10E3A1EB0C502000B5343 /* VehicleDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleDetailVC.swift; sourceTree = "<group>"; };
+		18E10E4D1EB0C5E2000B5343 /* AddVehicleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddVehicleCell.swift; sourceTree = "<group>"; };
+		18E10E4E1EB0C5E2000B5343 /* AddVehicleVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddVehicleVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +88,12 @@
 		18E10DB11EB0C3B5000B5343 /* ServiceBook */ = {
 			isa = PBXGroup;
 			children = (
+				18E10DC71EB0C502000B5343 /* Database */,
+				18E10DCA1EB0C502000B5343 /* Interface */,
+				18E10DCC1EB0C502000B5343 /* Model */,
+				18E10DD51EB0C502000B5343 /* Presenter */,
+				18E10DD71EB0C502000B5343 /* Utilities */,
+				18E10DD91EB0C502000B5343 /* ViewController */,
 				18E10DB21EB0C3B5000B5343 /* AppDelegate.swift */,
 				18E10DB41EB0C3B5000B5343 /* ViewController.swift */,
 				18E10DB61EB0C3B5000B5343 /* Main.storyboard */,
@@ -65,6 +103,128 @@
 				18E10DB91EB0C3B5000B5343 /* ServiceBook.xcdatamodeld */,
 			);
 			path = ServiceBook;
+			sourceTree = "<group>";
+		};
+		18E10DC71EB0C502000B5343 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				18E10DC81EB0C502000B5343 /* Vehicle+CoreDataClass.swift */,
+				18E10DC91EB0C502000B5343 /* Vehicle+CoreDataProperties.swift */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
+		18E10DCA1EB0C502000B5343 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				18E10DCB1EB0C502000B5343 /* AllVehiclesI.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		18E10DCC1EB0C502000B5343 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				18E10DCD1EB0C502000B5343 /* AuthenticationManager */,
+				18E10DCF1EB0C502000B5343 /* DatabaseManager */,
+				18E10DD11EB0C502000B5343 /* ModelManager */,
+				18E10DD31EB0C502000B5343 /* VehicleManager */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		18E10DCD1EB0C502000B5343 /* AuthenticationManager */ = {
+			isa = PBXGroup;
+			children = (
+				18E10DCE1EB0C502000B5343 /* AuthenticationManager.swift */,
+			);
+			path = AuthenticationManager;
+			sourceTree = "<group>";
+		};
+		18E10DCF1EB0C502000B5343 /* DatabaseManager */ = {
+			isa = PBXGroup;
+			children = (
+				18E10DD01EB0C502000B5343 /* DatabaseManager.swift */,
+			);
+			path = DatabaseManager;
+			sourceTree = "<group>";
+		};
+		18E10DD11EB0C502000B5343 /* ModelManager */ = {
+			isa = PBXGroup;
+			children = (
+				18E10DD21EB0C502000B5343 /* ModelManager.swift */,
+			);
+			path = ModelManager;
+			sourceTree = "<group>";
+		};
+		18E10DD31EB0C502000B5343 /* VehicleManager */ = {
+			isa = PBXGroup;
+			children = (
+				18E10DD41EB0C502000B5343 /* VehicleManager.swift */,
+			);
+			path = VehicleManager;
+			sourceTree = "<group>";
+		};
+		18E10DD51EB0C502000B5343 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				18E10DD61EB0C502000B5343 /* AddVehiclePresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		18E10DD71EB0C502000B5343 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				18E10DD81EB0C502000B5343 /* AppSharedInstance.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		18E10DD91EB0C502000B5343 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				18E10E4C1EB0C5E2000B5343 /* AddVehicle */,
+				18E10E331EB0C502000B5343 /* AllVehicles */,
+				18E10E361EB0C502000B5343 /* LoginVC */,
+				18E10E381EB0C502000B5343 /* VehicleDetail */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		18E10E331EB0C502000B5343 /* AllVehicles */ = {
+			isa = PBXGroup;
+			children = (
+				18E10E341EB0C502000B5343 /* AllVehiclesCell.swift */,
+				18E10E351EB0C502000B5343 /* AllVehiclesVC.swift */,
+			);
+			path = AllVehicles;
+			sourceTree = "<group>";
+		};
+		18E10E361EB0C502000B5343 /* LoginVC */ = {
+			isa = PBXGroup;
+			children = (
+				18E10E371EB0C502000B5343 /* LoginVC.swift */,
+			);
+			path = LoginVC;
+			sourceTree = "<group>";
+		};
+		18E10E381EB0C502000B5343 /* VehicleDetail */ = {
+			isa = PBXGroup;
+			children = (
+				18E10E391EB0C502000B5343 /* VehicleDetailCell.swift */,
+				18E10E3A1EB0C502000B5343 /* VehicleDetailVC.swift */,
+			);
+			path = VehicleDetail;
+			sourceTree = "<group>";
+		};
+		18E10E4C1EB0C5E2000B5343 /* AddVehicle */ = {
+			isa = PBXGroup;
+			children = (
+				18E10E4D1EB0C5E2000B5343 /* AddVehicleCell.swift */,
+				18E10E4E1EB0C5E2000B5343 /* AddVehicleVC.swift */,
+			);
+			path = AddVehicle;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,8 +299,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18E10E3F1EB0C502000B5343 /* DatabaseManager.swift in Sources */,
 				18E10DBB1EB0C3B5000B5343 /* ServiceBook.xcdatamodeld in Sources */,
+				18E10E501EB0C5E2000B5343 /* AddVehicleVC.swift in Sources */,
+				18E10E481EB0C502000B5343 /* AllVehiclesVC.swift in Sources */,
+				18E10E491EB0C502000B5343 /* LoginVC.swift in Sources */,
+				18E10E4B1EB0C502000B5343 /* VehicleDetailVC.swift in Sources */,
+				18E10E411EB0C502000B5343 /* VehicleManager.swift in Sources */,
+				18E10E471EB0C502000B5343 /* AllVehiclesCell.swift in Sources */,
 				18E10DB51EB0C3B5000B5343 /* ViewController.swift in Sources */,
+				18E10E3E1EB0C502000B5343 /* AuthenticationManager.swift in Sources */,
+				18E10E4A1EB0C502000B5343 /* VehicleDetailCell.swift in Sources */,
+				18E10E4F1EB0C5E2000B5343 /* AddVehicleCell.swift in Sources */,
+				18E10E3D1EB0C502000B5343 /* AllVehiclesI.swift in Sources */,
+				18E10E401EB0C502000B5343 /* ModelManager.swift in Sources */,
+				18E10E431EB0C502000B5343 /* AppSharedInstance.swift in Sources */,
+				18E10E3C1EB0C502000B5343 /* Vehicle+CoreDataProperties.swift in Sources */,
+				18E10E3B1EB0C502000B5343 /* Vehicle+CoreDataClass.swift in Sources */,
+				18E10E421EB0C502000B5343 /* AddVehiclePresenter.swift in Sources */,
 				18E10DB31EB0C3B5000B5343 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -301,6 +477,7 @@
 				18E10DC61EB0C3B5000B5343 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
