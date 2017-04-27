@@ -10,6 +10,12 @@ import UIKit
 
 class AllVehiclesCell: UITableViewCell {
 
+    @IBOutlet weak var lblVehicleNo: UILabel!
+    @IBOutlet weak var lblVehicleType: UILabel!
+    @IBOutlet weak var lblVehicleName: UILabel!
+    @IBOutlet weak var lblServiceDue: UILabel!
+    @IBOutlet weak var lblNotes: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

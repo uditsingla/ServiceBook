@@ -31,4 +31,18 @@ class AllVehiclesI: NSObject {
 //        self.averageRun = 0
         self.notes = ""
     }
+    
+    func resetData()
+    {
+        self.vehicleID = ""
+        self.vehicleType = ""
+        self.vehicleName = ""
+        self.vehicleNo = ""
+        self.serviceRequiredAfter = nil
+        self.averageRun = nil
+        self.notes = ""
+        self.lastServiceDate = nil
+        self.serviceDueDate = nil
+
+    }
 }

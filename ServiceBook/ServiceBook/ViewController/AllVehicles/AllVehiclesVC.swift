@@ -7,17 +7,60 @@
 //
 
 import UIKit
+import UserNotifications
+
+
+extension AllVehiclesVC : AllVehicleView
+{
+    func startLoading()
+    {
+        //        let loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
+        //        loadingNotification.mode = MBProgressHUDMode.indeterminate
+        //        loadingNotification.label.text = "Loading"
+    }
+    func finishLoading()
+    {
+        //        MBProgressHUD.hide(for: self.view, animated: true)
+        
+    }
+    
+   func allVehiclesReceives(arrVehicles : NSMutableArray)
+   {
+    self.arrAllVehicles.removeAllObjects()
+    self.arrAllVehicles.addObjects(from: arrVehicles as [AnyObject])
+    tableAllVehicles.reloadData()
+    }
+    
+    
+    func vehicleDeleted()
+    {
+        allvehiclePrsenter.getAllVehicles()
+    }
+    
+}
+
 
 class AllVehiclesVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
+     let allvehiclePrsenter  = AllVehiclesPresenter()
+     var arrAllVehicles = NSMutableArray()
+    
     @IBOutlet weak var tableAllVehicles: UITableView!
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-
+        allvehiclePrsenter.attachView(self)
         
         tableAllVehicles.setNeedsLayout()
         tableAllVehicles.estimatedRowHeight = 45
         tableAllVehicles.rowHeight = UITableViewAutomaticDimension
+        tableAllVehicles.tableFooterView = UIView()
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        allvehiclePrsenter.getAllVehicles()
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,11 +78,19 @@ class AllVehiclesVC: UIViewController,UITableViewDelegate,UITableViewDataSource 
     
     func tableView(_ tableView:UITableView, numberOfRowsInSection section:Int) -> Int
     {
-        return 1
+        return arrAllVehicles.count
         
     }
     
-    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+                        
+            print("\(indexPath.row)")
+            let objVehicle = arrAllVehicles.object(at: indexPath.row) as! AllVehiclesI
+            allvehiclePrsenter.deleteVehicle(vehicleID: objVehicle.vehicleID)
+            //tableAllVehicles.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
     
     //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     //    {
@@ -57,6 +108,14 @@ class AllVehiclesVC: UIViewController,UITableViewDelegate,UITableViewDataSource 
     {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "AllVehiclesCell", for: indexPath) as! AllVehiclesCell
+        
+        let vehicleObj :  AllVehiclesI = arrAllVehicles.object(at: indexPath.row) as! AllVehiclesI
+        
+        cell.lblVehicleNo.text = "Vehicle no : \(vehicleObj.vehicleNo!)"
+        cell.lblServiceDue.text = "Service due date : \(AppSharedInstance.sharedInstance.getFormattedStr(formatterType: AppSharedInstance.sharedInstance.myDateFormatter, dateObj: vehicleObj.serviceDueDate!) as String)"
+        cell.lblVehicleName.text = "Vehicle name : \(vehicleObj.vehicleName!)"
+        cell.lblVehicleType.text = vehicleObj.vehicleType!
+        cell.lblNotes.text = "Notes : \(vehicleObj.notes!)"
         
         return cell
         

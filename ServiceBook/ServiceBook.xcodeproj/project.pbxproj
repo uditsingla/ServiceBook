@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		184F08671EB1D49C0070F9A3 /* AllVehiclesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184F08661EB1D49C0070F9A3 /* AllVehiclesPresenter.swift */; };
 		18E10DB31EB0C3B5000B5343 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E10DB21EB0C3B5000B5343 /* AppDelegate.swift */; };
 		18E10DB51EB0C3B5000B5343 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E10DB41EB0C3B5000B5343 /* ViewController.swift */; };
 		18E10DB81EB0C3B5000B5343 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18E10DB61EB0C3B5000B5343 /* Main.storyboard */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		184F08661EB1D49C0070F9A3 /* AllVehiclesPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllVehiclesPresenter.swift; sourceTree = "<group>"; };
 		18E10DAF1EB0C3B5000B5343 /* ServiceBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ServiceBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18E10DB21EB0C3B5000B5343 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18E10DB41EB0C3B5000B5343 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				18E10DD61EB0C502000B5343 /* AddVehiclePresenter.swift */,
+				184F08661EB1D49C0070F9A3 /* AllVehiclesPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -195,8 +198,8 @@
 		18E10E331EB0C502000B5343 /* AllVehicles */ = {
 			isa = PBXGroup;
 			children = (
-				18E10E341EB0C502000B5343 /* AllVehiclesCell.swift */,
 				18E10E351EB0C502000B5343 /* AllVehiclesVC.swift */,
+				18E10E341EB0C502000B5343 /* AllVehiclesCell.swift */,
 			);
 			path = AllVehicles;
 			sourceTree = "<group>";
@@ -221,8 +224,8 @@
 		18E10E4C1EB0C5E2000B5343 /* AddVehicle */ = {
 			isa = PBXGroup;
 			children = (
-				18E10E4D1EB0C5E2000B5343 /* AddVehicleCell.swift */,
 				18E10E4E1EB0C5E2000B5343 /* AddVehicleVC.swift */,
+				18E10E4D1EB0C5E2000B5343 /* AddVehicleCell.swift */,
 			);
 			path = AddVehicle;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18E10E3F1EB0C502000B5343 /* DatabaseManager.swift in Sources */,
+				184F08671EB1D49C0070F9A3 /* AllVehiclesPresenter.swift in Sources */,
 				18E10DBB1EB0C3B5000B5343 /* ServiceBook.xcdatamodeld in Sources */,
 				18E10E501EB0C5E2000B5343 /* AddVehicleVC.swift in Sources */,
 				18E10E481EB0C502000B5343 /* AllVehiclesVC.swift in Sources */,

@@ -21,17 +21,21 @@ class VehicleManager: NSObject {
         })
     }
     
-    func deleteVehicle(vehicelID : String)  {
+    func deleteVehicle(vehicelID : String, completion : @escaping (Bool) -> Void)  {
         
-         ModelManager.sharedInstance.dbManager.deleteRecord(recordID: vehicelID , entityName: "Vehicle")
+        ModelManager.sharedInstance.dbManager.deleteRecord(recordID: vehicelID , entityName: "Vehicle", completion: {
+            success in
+            
+            completion(success)
+        })        
     }
     
     func updateVehileInfo(dictData : NSMutableDictionary)  {
         
     }
     
-    func getAllVehicles(dictData : NSMutableDictionary)
+    func getAllVehicles() -> NSMutableArray
     {
-        
+        return ModelManager.sharedInstance.dbManager.getAllRecords(entityName: "Vehicle")!
     }
 }

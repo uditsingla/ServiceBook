@@ -32,7 +32,7 @@ class DatabaseManager: NSObject {
         do {
             try self.managedObjectContext.save()
             completion(true)
-            print("saved!")
+            print("record saved!")
         } catch let error as NSError  {
             print("Could not save \(error), \(error.userInfo)")
              completion(false)
@@ -42,7 +42,32 @@ class DatabaseManager: NSObject {
 
     }
     
-    func deleteRecord(recordID : String ,entityName : String)  {
+    func deleteRecord(recordID : String,  entityName : String, completion: @escaping (Bool) -> Void)  {
+        
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
+        
+        let predicate = NSPredicate(format: "vehicleID == %@", recordID)
+        fetchRequest.predicate = predicate
+        
+        
+        let result = try? self.managedObjectContext.fetch(fetchRequest)
+        let resultData = result
+        
+        for object in resultData! {
+            self.managedObjectContext.delete(object)
+        }
+        
+        do {
+            try self.managedObjectContext.save()
+             completion(true)
+            print("deleted!")
+        } catch let error as NSError  {
+             completion(false)
+            print("Could not delete \(error), \(error.userInfo)")
+        } catch {
+             completion(false)
+        }
+
         
     }
     
@@ -50,7 +75,7 @@ class DatabaseManager: NSObject {
         
     }
     
-    func getAllRecords(predicate : NSPredicate, entityName : String) -> NSMutableArray?
+    func getAllRecords(entityName : String) -> NSMutableArray?
     {
         
         // Initialize Fetch Request
@@ -97,7 +122,7 @@ class DatabaseManager: NSObject {
             print(fetchError)
         }
     
-    return nil
+    return NSMutableArray()
         
     }
     
