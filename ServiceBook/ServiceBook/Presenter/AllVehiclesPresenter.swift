@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 protocol AllVehicleView : NSObjectProtocol {
     
@@ -43,11 +44,14 @@ class AllVehiclesPresenter: NSObject {
             success in
             
             self.allVehicleView?.vehicleDeleted()
-            
         })
-        
-        
-        
     }
+    
+    func removeNotification(arrNotificationID : [String])
+    {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: arrNotificationID)
+    }
+    
+    
     
 }

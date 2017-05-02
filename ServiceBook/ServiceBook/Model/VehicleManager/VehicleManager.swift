@@ -21,6 +21,15 @@ class VehicleManager: NSObject {
         })
     }
     
+    func editVehicalInfo(objVehicle : AllVehiclesI, completion : @escaping (Bool) -> Void)  {
+        
+        ModelManager.sharedInstance.dbManager.editRecord(objVehicle: objVehicle, entityName: "Vehicle" , completion: {
+            success in
+            
+            completion(success)
+        })
+    }
+    
     func deleteVehicle(vehicelID : String, completion : @escaping (Bool) -> Void)  {
         
         ModelManager.sharedInstance.dbManager.deleteRecord(recordID: vehicelID , entityName: "Vehicle", completion: {
@@ -31,6 +40,7 @@ class VehicleManager: NSObject {
     }
     
     func updateVehileInfo(dictData : NSMutableDictionary)  {
+        
         
     }
     

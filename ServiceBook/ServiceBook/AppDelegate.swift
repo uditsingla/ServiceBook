@@ -37,6 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("Application Not Allowed to Display Notifications")
             }
         }
+        
+        self
       
         return true
     }

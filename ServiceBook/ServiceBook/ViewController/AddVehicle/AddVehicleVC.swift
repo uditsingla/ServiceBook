@@ -7,15 +7,6 @@
 //
 
 import UIKit
-import UserNotifications
-
-extension AddVehicleVC : UNUserNotificationCenterDelegate {
-    
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.alert])
-    }
-    
-}
 
 extension AddVehicleVC : AddVehicleView
 {
@@ -35,25 +26,51 @@ extension AddVehicleVC : AddVehicleView
     {
         print("Vehicle has been added succesfully")
         
+        addvehiclePrsenter.setLocalNotification(strUniqueID : strUniqueID!, notificationDate: objVehicle.serviceDueDate!)
+        
         objVehicle.resetData()
+        
+        dtLastService = nil
+        
         tableAddVehicle.reloadData()
         
-        self.setLocalNotification()
+        
+    }
+    
+    func vehicleInfoUpdated(isSuccess : Bool)
+    {
+        print("Vehicle info has been added updated succesfully")
+
+        //remove Existing notification
+        addvehiclePrsenter.removeNotification(arrNotificationID: [objVehicle.vehicleID])
+
+        
+        //add New Local Notification
+         addvehiclePrsenter.setLocalNotification(strUniqueID : objVehicle.vehicleID, notificationDate: objVehicle.serviceDueDate!)
+        
+        self.navigationController?.popViewController(animated: true)
+        
     }
     
 
 }
 
-class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,UITextViewDelegate,UITextFieldDelegate {
+class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,UITextViewDelegate,UITextFieldDelegate  {
+    
+    @IBOutlet weak var contraintTopViewHeight: NSLayoutConstraint!
+    
+     @IBOutlet weak var viewTopBar: UIView!
     
     @IBOutlet weak var viewDatePicker: UIView!
     
     @IBOutlet weak var pickerDate: UIDatePicker!
     
-    var dtLastService : Date?
-    var dtServiceDueDate : Date?
+    var isRecordEdit : Bool = false
     
-    let objVehicle : AllVehiclesI = AllVehiclesI()
+    var dtLastService : Date?
+    //var dtServiceDueDate : Date?
+    
+    var objVehicle : AllVehiclesI = AllVehiclesI()
 
     let addvehiclePrsenter  = AddVehiclePresenter()
     
@@ -61,11 +78,30 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
     
     var dictData  = NSMutableDictionary()
     
+    var strUniqueID : String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.isNavigationBarHidden = true
+        
+        
 
         // Do any additional setup after loading the view.
         addvehiclePrsenter.attachView(self)
+        
+        if(isRecordEdit)
+        {
+            contraintTopViewHeight.constant = 66
+            viewTopBar.isHidden = false
+        }
+        else
+        {
+            contraintTopViewHeight.constant = 0
+            viewTopBar.isHidden = true
+
+        }
+        
         
         tableAddVehicle.setNeedsLayout()        
         tableAddVehicle.estimatedRowHeight = 370
@@ -75,7 +111,7 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
         viewDatePicker.isHidden = true
         
         pickerDate.addTarget(self, action: #selector(selectDate), for: UIControlEvents.valueChanged)
-        UNUserNotificationCenter.current().delegate = self
+        //UNUserNotificationCenter.current().delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -91,69 +127,25 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
         print(pickerDate.date)
     }
     
-    // MARK: - Custom Functions    
+    // MARK: - Custom Functions
     
-    func getServiceDueDate() -> String {
-        
-        let averageDayRun  = Float(objVehicle.serviceRequiredAfter!)/Float(objVehicle.averageRun!)
-        
-        let noOfDays = Float(objVehicle.serviceRequiredAfter!)/averageDayRun
-        
-        let currentCalendar = NSCalendar.current
-        
-        dtServiceDueDate = currentCalendar.date(byAdding: Calendar.Component.day, value: Int(noOfDays), to: dtLastService!)
-        
-        let strDueDate = AppSharedInstance.sharedInstance.getFormattedStr(formatterType: AppSharedInstance.sharedInstance.myDateFormatter, dateObj: dtServiceDueDate!)
-        
-        print("Service due on : \(strDueDate)")
-
-        return strDueDate
-        
-    }
     
-    func setLocalNotification()
-    {
-        // Create Notification Content
-        let notificationContent = UNMutableNotificationContent()
-        
-        // Configure Notification Content
-        notificationContent.title = "Service Required"
-        notificationContent.subtitle = "Get Ready"
-        notificationContent.body = "You should go to see a workshop"
-        
-        
-        let date = Date(timeIntervalSinceNow: 10)
-        let triggerDate = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second,], from: date)
-        let notificationTrigger = UNCalendarNotificationTrigger(dateMatching: triggerDate,
-                                                    repeats: false)
-        
-        
-        // Add Trigger W.R.T Time
-//        let notificationTriggerTest = UNTimeIntervalNotificationTrigger(timeInterval: 10.0, repeats: false)
-//        
-//        // Create Notification Request
-//        let notificationRequestTest = UNNotificationRequest(identifier: "cocoacasts_local_notification", content: notificationContent, trigger: notificationTriggerTest)
-       
-         let notificationRequest = UNNotificationRequest(identifier: "cocoacasts_local_notification", content: notificationContent, trigger: notificationTrigger)
-        // Add Request to User Notification Center
-        UNUserNotificationCenter.current().add(notificationRequest) { (error) in
-            if let error = error {
-                print("Unable to Add Notification Request (\(error), \(error.localizedDescription))")
-            }
-        }
-    }
     
     //MARK: - Clk Functions
 
+    @IBAction func clkBack(_ sender: Any)
+    {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    
     @IBAction func clkDone(_ sender: Any) {
         
         let dateFormater : DateFormatter = DateFormatter()
         
         dateFormater.dateFormat = AppSharedInstance.sharedInstance.myDateFormatter
         
-        
-        let srtDate = AppSharedInstance.sharedInstance.getFormattedStr(formatterType: AppSharedInstance.sharedInstance.myDateFormatter, dateObj: dtLastService!)
-        
+        let srtDate = AppSharedInstance.sharedInstance.getFormattedStr(formatterType: AppSharedInstance.sharedInstance.myDateFormatter, dateObj: dtLastService!)        
         
         objVehicle.lastServiceDate = dateFormater.date(from: srtDate)
         
@@ -174,10 +166,19 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
         
         print(cell.txtVehicleName.text! as String)
         
-        getServiceDueDate()
+        addvehiclePrsenter.getServiceDueDate(objVehicle : objVehicle)
         
         //Populate Objects
-        objVehicle.vehicleID = UUID().uuidString
+        if(!isRecordEdit)
+        {
+            strUniqueID = UUID().uuidString
+            objVehicle.vehicleID = strUniqueID!
+        }
+        
+        
+        // print("Uniuqe id : \(strUniqueID!)")
+        
+        
         objVehicle.vehicleName = cell.txtVehicleName.text
         objVehicle.vehicleType = cell.txtVehicleType.text
         
@@ -185,7 +186,7 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
             objVehicle.serviceRequiredAfter = myNumber.intValue
         }
         
-        objVehicle.serviceDueDate = dtServiceDueDate
+        //objVehicle.serviceDueDate = dtServiceDueDate
         
         if let myAverageRun = NumberFormatter().number(from: cell.txtWeeklyRun.text!) {
             objVehicle.averageRun = myAverageRun.intValue
@@ -194,17 +195,22 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
         objVehicle.vehicleNo = cell.txtVehicleNo.text
         objVehicle.notes = cell.txtNotes.text
         
-        
-        addvehiclePrsenter.addVehicle(objVehicle: objVehicle)
 
+        if(isRecordEdit)
+        {
+            //Edit Existing record
+            addvehiclePrsenter.editVehicalInfo(objVehicle : objVehicle)
+        }
+        else
+        {
+            //Add New Record
+             addvehiclePrsenter.addVehicle(objVehicle: objVehicle)
+        }
+       
+        
     }
     
     
-    
-    @IBAction func clkEdit(_ sender: Any) {
-        
-        
-    }
     
      // MARK: - Table View Delegates
     func numberOfSections(in tableView: UITableView) -> Int
@@ -225,6 +231,7 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
         cell.txtVehicleName.text = objVehicle.vehicleName!
         cell.txtVehicleType.text = objVehicle.vehicleType!
         
+        
         if(objVehicle.serviceRequiredAfter != nil)
         {
         cell.txtServiceRequired.text = objVehicle.serviceRequiredAfter!.description
@@ -233,14 +240,21 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
         {
             cell.txtServiceRequired.text = ""
         }
+        
+        if(isRecordEdit)
+        {
+            dtLastService = objVehicle.lastServiceDate
+        }
+        
         if(dtLastService != nil)
         {
-        let srtDate = AppSharedInstance.sharedInstance.getFormattedStr(formatterType: AppSharedInstance.sharedInstance.myDateFormatter, dateObj: dtLastService!)
-        cell.txtLastServiceDate.text = srtDate
+            let srtDate = AppSharedInstance.sharedInstance.getFormattedStr(formatterType: AppSharedInstance.sharedInstance.myDateFormatter, dateObj: dtLastService!)
+            
+            cell.txtLastServiceDate.text = srtDate
         }
         else
         {
-            cell.txtServiceRequired.text = ""
+            cell.txtLastServiceDate.text = ""
         }
         
         if(objVehicle.averageRun != nil)
@@ -249,8 +263,9 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
         }
         else
         {
-            cell.txtServiceRequired.text = ""
+            cell.txtWeeklyRun.text = ""
         }
+        
         cell.txtVehicleNo.text = objVehicle.vehicleNo!
         cell.txtNotes.text = objVehicle.notes
         
@@ -283,10 +298,16 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
     // MARK: - TextField delegates
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        
         if(textField.tag == 4)
         {
-            textField.resignFirstResponder()
-            viewDatePicker.isHidden = false
+           self.view.endEditing(true)
+            
+           viewDatePicker.isHidden = false
+        }
+        else
+        {
+            viewDatePicker.isHidden = true
         }
     }
     
@@ -305,8 +326,8 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
             if let myNumber = NumberFormatter().number(from: textField.text!) {
                 objVehicle.serviceRequiredAfter = myNumber.intValue
             }
-            
-            return
+            break
+
             
         case 5:
             if let myNumber = NumberFormatter().number(from: textField.text!) {
@@ -321,6 +342,21 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
         }
     }
     
+func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool
+{
+    if(textField.tag ==  4)
+    {
+        self.view.endEditing(true)
+        
+        viewDatePicker.isHidden = false
+        return false
+    }
+    else
+    {
+        viewDatePicker.isHidden = true
+    }
+    return true
+}
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         

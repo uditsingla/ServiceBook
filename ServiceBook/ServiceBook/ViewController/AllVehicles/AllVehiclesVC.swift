@@ -34,6 +34,8 @@ extension AllVehiclesVC : AllVehicleView
     
     func vehicleDeleted()
     {
+        allvehiclePrsenter.removeNotification(arrNotificationID: [objVehicle.vehicleID])
+        
         allvehiclePrsenter.getAllVehicles()
     }
     
@@ -43,7 +45,8 @@ extension AllVehiclesVC : AllVehicleView
 class AllVehiclesVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
      let allvehiclePrsenter  = AllVehiclesPresenter()
-     var arrAllVehicles = NSMutableArray()
+     var arrAllVehicles =  NSMutableArray()
+    var objVehicle : AllVehiclesI = AllVehiclesI()
     
     @IBOutlet weak var tableAllVehicles: UITableView!
     override func viewDidLoad() {
@@ -86,7 +89,7 @@ class AllVehiclesVC: UIViewController,UITableViewDelegate,UITableViewDataSource 
         if editingStyle == .delete {
                         
             print("\(indexPath.row)")
-            let objVehicle = arrAllVehicles.object(at: indexPath.row) as! AllVehiclesI
+            objVehicle = arrAllVehicles.object(at: indexPath.row) as! AllVehiclesI
             allvehiclePrsenter.deleteVehicle(vehicleID: objVehicle.vehicleID)
             //tableAllVehicles.deleteRows(at: [indexPath], with: .fade)
         }
@@ -124,7 +127,15 @@ class AllVehiclesVC: UIViewController,UITableViewDelegate,UITableViewDataSource 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         
+        let vehicleObj :  AllVehiclesI = arrAllVehicles.object(at: indexPath.row) as! AllVehiclesI
         
+        let addVehicleVC = self.storyboard?.instantiateViewController(withIdentifier: "AddVehicleVC") as! AddVehicleVC
+        
+        addVehicleVC.objVehicle = vehicleObj
+        addVehicleVC.isRecordEdit = true
+        
+        self.navigationController?.pushViewController(addVehicleVC, animated: true)
+
     }
     
 

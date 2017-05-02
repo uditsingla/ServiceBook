@@ -42,6 +42,52 @@ class DatabaseManager: NSObject {
 
     }
     
+    func editRecord(objVehicle : AllVehiclesI, entityName : String, completion: @escaping (Bool) -> Void)
+    {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        let predicate = NSPredicate(format: "vehicleID == %@",objVehicle.vehicleID)
+
+        let sortDescriptor = NSSortDescriptor(key: "serviceDueDate", ascending: true)
+        let sortDescriptors = [sortDescriptor]
+        
+        fetchRequest.sortDescriptors = sortDescriptors
+        fetchRequest.predicate = predicate
+        
+        
+        do {
+            let result = try self.managedObjectContext.fetch(fetchRequest)
+            print(result)
+            
+            if(result.count>0)
+            {
+                let obj : Vehicle = result[0] as! Vehicle
+                
+                obj.vehicleType = objVehicle.vehicleType!
+                obj.vehicleID = objVehicle.vehicleID
+                obj.vehicleName = objVehicle.vehicleName
+                obj.serviceRequiredAfter = Int32(Int(objVehicle.serviceRequiredAfter!))
+                obj.lastServiceDate = objVehicle.lastServiceDate as NSDate?
+                obj.averageRun = Int16(objVehicle.averageRun!)
+                obj.vehicleNo = objVehicle.vehicleNo
+                obj.notes = objVehicle.notes
+                obj.serviceDueDate = objVehicle.serviceDueDate as NSDate?
+                
+                print("something")
+               
+            }
+            try self.managedObjectContext.save()
+            completion(true)
+        }            
+         catch let error as NSError  {
+            completion(false)
+            print("Could not update \(error), \(error.userInfo)")
+        } catch {
+            completion(false)
+        }
+        
+
+    }
+    
     func deleteRecord(recordID : String,  entityName : String, completion: @escaping (Bool) -> Void)  {
         
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
@@ -100,6 +146,7 @@ class DatabaseManager: NSObject {
                     let obj : Vehicle = result[i]
                     let allVehicle : AllVehiclesI = AllVehiclesI()
                     
+                    allVehicle.vehicleType = obj.vehicleType!
                     allVehicle.vehicleID = obj.vehicleID!
                     allVehicle.vehicleName = obj.vehicleName
                     allVehicle.serviceRequiredAfter = Int(obj.serviceRequiredAfter)

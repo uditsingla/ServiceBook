@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,7 +13,7 @@
         <scene sceneID="t16-bh-zW5">
             <objects>
                 <navigationController id="r4R-Va-U5x" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" hidden="YES" contentMode="scaleToFill" misplaced="YES" id="j5b-1M-LLU">
+                    <navigationBar key="navigationBar" hidden="YES" contentMode="scaleToFill" id="j5b-1M-LLU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -95,7 +94,7 @@
                                         <rect key="frame" x="0.0" y="1" width="375" height="140"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dfs-TX-xdu" id="rti-ys-ZCR">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="139"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a08-aR-oYP">
@@ -278,7 +277,7 @@
             </objects>
             <point key="canvasLocation" x="1814" y="797"/>
         </scene>
-        <!--Add Vehicel-->
+        <!--AddVehicle-->
         <scene sceneID="3bw-Io-Wcf">
             <objects>
                 <viewController storyboardIdentifier="AddVehicleVC" id="ozC-Hi-86U" customClass="AddVehicleVC" customModule="ServiceBook" customModuleProvider="target" sceneMemberID="viewController">
@@ -290,6 +289,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wme-yu-S5r">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dC5-mo-pzW">
+                                        <rect key="frame" x="22" y="18" width="46" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                        <state key="normal" title="Back">
+                                            <color key="titleColor" red="0.0" green="0.58431372550000005" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="clkBack:" destination="ozC-Hi-86U" eventType="touchUpInside" id="WVy-A5-jcO"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="66" id="9OM-c9-lOb"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="344" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="uyW-G5-Ka8">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -492,30 +511,26 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Xhn-O1-Xel" firstAttribute="top" secondItem="uyW-G5-Ka8" secondAttribute="bottom" id="84J-pL-zCq"/>
-                            <constraint firstItem="uyW-G5-Ka8" firstAttribute="leading" secondItem="Bg0-Sx-Hgg" secondAttribute="leading" id="9v1-yD-RVB"/>
+                            <constraint firstItem="uyW-G5-Ka8" firstAttribute="top" secondItem="wme-yu-S5r" secondAttribute="bottom" constant="-2" id="4fB-wV-7HE"/>
                             <constraint firstItem="Xhn-O1-Xel" firstAttribute="top" secondItem="WF9-NS-myZ" secondAttribute="bottom" id="Fik-d6-FQh"/>
                             <constraint firstAttribute="trailing" secondItem="WF9-NS-myZ" secondAttribute="trailing" id="H4V-Wv-8Ee"/>
-                            <constraint firstItem="uyW-G5-Ka8" firstAttribute="top" secondItem="A5R-Gu-UxX" secondAttribute="bottom" id="brq-xe-e52"/>
+                            <constraint firstAttribute="trailing" secondItem="uyW-G5-Ka8" secondAttribute="trailing" id="M41-yB-fpR"/>
+                            <constraint firstItem="wme-yu-S5r" firstAttribute="leading" secondItem="Bg0-Sx-Hgg" secondAttribute="leading" id="N5g-qd-tjz"/>
+                            <constraint firstItem="wme-yu-S5r" firstAttribute="top" secondItem="Bg0-Sx-Hgg" secondAttribute="top" id="VDb-Pp-4Kk"/>
+                            <constraint firstItem="uyW-G5-Ka8" firstAttribute="leading" secondItem="Bg0-Sx-Hgg" secondAttribute="leading" id="YTf-Sw-4si"/>
+                            <constraint firstItem="WF9-NS-myZ" firstAttribute="top" secondItem="wme-yu-S5r" secondAttribute="bottom" constant="287" id="ptK-AF-pHd"/>
+                            <constraint firstItem="Xhn-O1-Xel" firstAttribute="top" secondItem="uyW-G5-Ka8" secondAttribute="bottom" id="sWE-nz-zdL"/>
                             <constraint firstItem="WF9-NS-myZ" firstAttribute="leading" secondItem="Bg0-Sx-Hgg" secondAttribute="leading" id="sm9-cF-4t9"/>
-                            <constraint firstAttribute="trailing" secondItem="uyW-G5-Ka8" secondAttribute="trailing" id="tDO-Y9-9L3"/>
+                            <constraint firstAttribute="trailing" secondItem="wme-yu-S5r" secondAttribute="trailing" id="vuR-ZV-XOM"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="AddVehicle" id="q5l-91-Gkb"/>
-                    <navigationItem key="navigationItem" title="Add Vehicel" id="dHf-Xn-lAb">
-                        <rightBarButtonItems>
-                            <barButtonItem title="Save" id="dPD-5Y-6dk"/>
-                            <barButtonItem title="Edit" id="XJl-p5-pwF">
-                                <connections>
-                                    <action selector="clkEdit:" destination="ozC-Hi-86U" id="Cds-In-rn2"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
-                    </navigationItem>
                     <connections>
+                        <outlet property="contraintTopViewHeight" destination="9OM-c9-lOb" id="wIS-0P-je6"/>
                         <outlet property="pickerDate" destination="Twf-P5-lQg" id="hWK-rr-dm4"/>
                         <outlet property="tableAddVehicle" destination="uyW-G5-Ka8" id="5Uk-Qy-RgC"/>
                         <outlet property="viewDatePicker" destination="WF9-NS-myZ" id="g9q-UF-B2i"/>
+                        <outlet property="viewTopBar" destination="wme-yu-S5r" id="2pf-6D-I0l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kYI-Tg-Efj" userLabel="First Responder" sceneMemberID="firstResponder"/>

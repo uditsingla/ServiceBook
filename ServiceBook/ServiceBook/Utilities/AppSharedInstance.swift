@@ -7,14 +7,34 @@
 //
 
 import UIKit
+import UserNotifications
+
+extension AppSharedInstance : UNUserNotificationCenterDelegate {
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert])
+    }
+    
+}
+
 
 class AppSharedInstance: NSObject {
+    
+    
     
     static let sharedInstance = AppSharedInstance()
     
    let appdelegate = UIApplication.shared.delegate as! AppDelegate
 
     let myDateFormatter = "dd MMM yyyy"
+    
+    override init()
+    {
+        super.init()
+        UNUserNotificationCenter.current().delegate = self
+      
+    }
+    
     
     func getTimeDuration(startDate : String, endDate : String, formatterType : String) -> String
     {
@@ -41,6 +61,7 @@ class AppSharedInstance: NSObject {
         return dateFormatter.string(from: dateObj as Date)
     }
 
+    
     
    
 }
