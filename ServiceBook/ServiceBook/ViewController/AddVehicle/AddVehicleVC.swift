@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 extension AddVehicleVC : AddVehicleView
 {
     func startLoading()
@@ -57,6 +58,8 @@ extension AddVehicleVC : AddVehicleView
 
 class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,UITextViewDelegate,UITextFieldDelegate  {
     
+    @IBOutlet weak var btnBack: UIButton!
+    @IBOutlet weak var lblHeading: UILabel!
     @IBOutlet weak var contraintTopViewHeight: NSLayoutConstraint!
     
      @IBOutlet weak var viewTopBar: UIView!
@@ -85,23 +88,19 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
         
         self.navigationController?.isNavigationBarHidden = true
         
-        
-
         // Do any additional setup after loading the view.
         addvehiclePrsenter.attachView(self)
         
         if(isRecordEdit)
-        {
-            contraintTopViewHeight.constant = 66
-            viewTopBar.isHidden = false
+        {            
+            lblHeading.text = "Update Info"
+            btnBack.isHidden = false
         }
         else
         {
-            contraintTopViewHeight.constant = 0
-            viewTopBar.isHidden = true
-
+            lblHeading.text = "Add Vehicle"
+            btnBack.isHidden = true
         }
-        
         
         tableAddVehicle.setNeedsLayout()        
         tableAddVehicle.estimatedRowHeight = 370
@@ -227,6 +226,8 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
     {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "AddVehicleCell", for: indexPath) as! AddVehicleCell
+        
+        
         
         cell.txtVehicleName.text = objVehicle.vehicleName!
         cell.txtVehicleType.text = objVehicle.vehicleType!

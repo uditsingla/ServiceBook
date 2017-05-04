@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1806A8771EBB0C2A00FE02BB /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1806A8761EBB0C2A00FE02BB /* HistoryVC.swift */; };
 		184F08671EB1D49C0070F9A3 /* AllVehiclesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184F08661EB1D49C0070F9A3 /* AllVehiclesPresenter.swift */; };
 		18E10DB31EB0C3B5000B5343 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E10DB21EB0C3B5000B5343 /* AppDelegate.swift */; };
 		18E10DB51EB0C3B5000B5343 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E10DB41EB0C3B5000B5343 /* ViewController.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1806A8761EBB0C2A00FE02BB /* HistoryVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
 		184F08661EB1D49C0070F9A3 /* AllVehiclesPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllVehiclesPresenter.swift; sourceTree = "<group>"; };
 		18E10DAF1EB0C3B5000B5343 /* ServiceBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ServiceBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18E10DB21EB0C3B5000B5343 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +73,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1806A8751EBB0C0900FE02BB /* History */ = {
+			isa = PBXGroup;
+			children = (
+				1806A8761EBB0C2A00FE02BB /* HistoryVC.swift */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
 		18E10DA61EB0C3B5000B5343 = {
 			isa = PBXGroup;
 			children = (
@@ -187,6 +197,7 @@
 		18E10DD91EB0C502000B5343 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				1806A8751EBB0C0900FE02BB /* History */,
 				18E10E4C1EB0C5E2000B5343 /* AddVehicle */,
 				18E10E331EB0C502000B5343 /* AllVehicles */,
 				18E10E361EB0C502000B5343 /* LoginVC */,
@@ -309,6 +320,7 @@
 				18E10E481EB0C502000B5343 /* AllVehiclesVC.swift in Sources */,
 				18E10E491EB0C502000B5343 /* LoginVC.swift in Sources */,
 				18E10E4B1EB0C502000B5343 /* VehicleDetailVC.swift in Sources */,
+				1806A8771EBB0C2A00FE02BB /* HistoryVC.swift in Sources */,
 				18E10E411EB0C502000B5343 /* VehicleManager.swift in Sources */,
 				18E10E471EB0C502000B5343 /* AllVehiclesCell.swift in Sources */,
 				18E10DB51EB0C3B5000B5343 /* ViewController.swift in Sources */,

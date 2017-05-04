@@ -74,7 +74,7 @@
             </objects>
             <point key="canvasLocation" x="298" y="99"/>
         </scene>
-        <!--UpcomingServices-->
+        <!--All VehiclesVC-->
         <scene sceneID="ntJ-GY-Evb">
             <objects>
                 <viewController storyboardIdentifier="AllVehiclesVC" id="rbZ-uN-14B" customClass="AllVehiclesVC" customModule="ServiceBook" customModuleProvider="target" sceneMemberID="viewController">
@@ -174,7 +174,7 @@
                             <constraint firstItem="B5p-66-W01" firstAttribute="leading" secondItem="lQh-UC-iMV" secondAttribute="leading" id="oRx-co-az0"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="UpcomingServices" id="TfX-1S-bav"/>
+                    <tabBarItem key="tabBarItem" title="" image="UpcomingServices" id="TfX-1S-bav"/>
                     <navigationItem key="navigationItem" id="lr5-bN-QTO">
                         <barButtonItem key="rightBarButtonItem" title="Add" id="lxW-WF-mK4"/>
                     </navigationItem>
@@ -199,11 +199,31 @@
                     <connections>
                         <segue destination="rbZ-uN-14B" kind="relationship" relationship="viewControllers" id="Gvl-5W-ZcK"/>
                         <segue destination="ozC-Hi-86U" kind="relationship" relationship="viewControllers" id="r5N-QP-Sz3"/>
+                        <segue destination="cZo-nn-qYf" kind="relationship" relationship="viewControllers" id="tvD-5x-v66"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zFY-Zb-lo3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1068" y="99"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="VWS-GK-qTY">
+            <objects>
+                <viewController id="cZo-nn-qYf" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TPj-oW-OtE"/>
+                        <viewControllerLayoutGuide type="bottom" id="1kf-yn-J7x"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="WaQ-XH-0jf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="PastServices" id="zvJ-3a-bt8"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vcD-Be-J2r" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3238" y="99"/>
         </scene>
         <!--Vehicle DetailVC-->
         <scene sceneID="aDi-qk-nJ4">
@@ -277,7 +297,7 @@
             </objects>
             <point key="canvasLocation" x="1814" y="797"/>
         </scene>
-        <!--AddVehicle-->
+        <!--Add VehicleVC-->
         <scene sceneID="3bw-Io-Wcf">
             <objects>
                 <viewController storyboardIdentifier="AddVehicleVC" id="ozC-Hi-86U" customClass="AddVehicleVC" customModule="ServiceBook" customModuleProvider="target" sceneMemberID="viewController">
@@ -292,21 +312,31 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wme-yu-S5r">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
                                 <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nZU-Ci-Rqs">
+                                        <rect key="frame" x="76" y="22" width="223" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="1Bj-Cc-rVh"/>
+                                            <constraint firstAttribute="width" constant="223" id="lF8-08-tcw"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dC5-mo-pzW">
                                         <rect key="frame" x="22" y="18" width="46" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                        <state key="normal" title="Back">
-                                            <color key="titleColor" red="0.0" green="0.58431372550000005" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
+                                        <state key="normal" title="Back"/>
                                         <connections>
                                             <action selector="clkBack:" destination="ozC-Hi-86U" eventType="touchUpInside" id="WVy-A5-jcO"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.0" green="0.58431372550000005" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="nZU-Ci-Rqs" firstAttribute="centerX" secondItem="wme-yu-S5r" secondAttribute="centerX" id="0DE-xf-dSi"/>
                                     <constraint firstAttribute="height" constant="66" id="9OM-c9-lOb"/>
+                                    <constraint firstItem="nZU-Ci-Rqs" firstAttribute="top" secondItem="wme-yu-S5r" secondAttribute="top" constant="22" id="Zmx-om-7kB"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="344" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="uyW-G5-Ka8">
@@ -320,7 +350,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="369"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Vehical Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qrx-S5-6V6">
+                                                <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Vehicle Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qrx-S5-6V6">
                                                     <rect key="frame" x="17" y="10" width="340" height="30"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -329,7 +359,7 @@
                                                         <outlet property="delegate" destination="ozC-Hi-86U" id="27B-CC-Ncg"/>
                                                     </connections>
                                                 </textField>
-                                                <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Vehical Type" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0hJ-Xl-NQe">
+                                                <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Vehicle Type" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0hJ-Xl-NQe">
                                                     <rect key="frame" x="18" y="50" width="340" height="30"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -524,9 +554,11 @@
                             <constraint firstAttribute="trailing" secondItem="wme-yu-S5r" secondAttribute="trailing" id="vuR-ZV-XOM"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="AddVehicle" id="q5l-91-Gkb"/>
+                    <tabBarItem key="tabBarItem" title="" image="AddVehicle" id="q5l-91-Gkb"/>
                     <connections>
+                        <outlet property="btnBack" destination="dC5-mo-pzW" id="xTN-iF-dKo"/>
                         <outlet property="contraintTopViewHeight" destination="9OM-c9-lOb" id="wIS-0P-je6"/>
+                        <outlet property="lblHeading" destination="nZU-Ci-Rqs" id="lP9-CR-hxG"/>
                         <outlet property="pickerDate" destination="Twf-P5-lQg" id="hWK-rr-dm4"/>
                         <outlet property="tableAddVehicle" destination="uyW-G5-Ka8" id="5Uk-Qy-RgC"/>
                         <outlet property="viewDatePicker" destination="WF9-NS-myZ" id="g9q-UF-B2i"/>
@@ -538,4 +570,9 @@
             <point key="canvasLocation" x="2533.5999999999999" y="98.50074962518741"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="AddVehicle" width="25" height="17"/>
+        <image name="PastServices" width="25" height="25"/>
+        <image name="UpcomingServices" width="25" height="25"/>
+    </resources>
 </document>
