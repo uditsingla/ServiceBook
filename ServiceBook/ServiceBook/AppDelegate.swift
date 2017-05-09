@@ -18,6 +18,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.      
         
+        if application.value(forKey: "UIApplicationLaunchOptionsLocalNotificationKey") != nil
+        {
+            print("local notification data : \(application.value(forKey: "UIApplicationLaunchOptionsLocalNotificationKey"))")
+        }
+        
+        
+
+        
         // Request Notification Settings
         UNUserNotificationCenter.current().getNotificationSettings { (notificationSettings) in
             switch notificationSettings.authorizationStatus
@@ -38,9 +46,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        self
+        printFonts()
+        
+        
       
         return true
+    }
+    
+    func printFonts() {
+        let fontFamilyNames = UIFont.familyNames
+        for familyName in fontFamilyNames {
+            print("------------------------------")
+            print("Font Family Name = [\(familyName)]")
+            let names = UIFont.fontNames(forFamilyName: familyName )
+            print("Font Names = [\(names)]")
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

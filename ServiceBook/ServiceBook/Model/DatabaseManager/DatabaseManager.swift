@@ -121,16 +121,20 @@ class DatabaseManager: NSObject {
         
     }
     
-    func getAllRecords(entityName : String) -> NSMutableArray?
+    func getAllRecords(entityName : String, predicate : NSPredicate?) -> NSMutableArray?
     {
         
         // Initialize Fetch Request
         //let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
         let fetchRequest: NSFetchRequest<Vehicle> = Vehicle.fetchRequest()
-        
         let sortDescriptor = NSSortDescriptor(key: "serviceDueDate", ascending: true)
         let sortDescriptors = [sortDescriptor]
         fetchRequest.sortDescriptors = sortDescriptors
+
+        if(predicate  != nil)
+        {
+            fetchRequest.predicate = predicate
+        }
         
         do {
             let result = try self.managedObjectContext.fetch(fetchRequest)

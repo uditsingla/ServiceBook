@@ -34,7 +34,9 @@ class AllVehiclesPresenter: NSObject {
     
     func getAllVehicles()
     {
-        allVehicleView?.allVehiclesReceives(arrVehicles: ModelManager.sharedInstance.vehicalManager.getAllVehicles())
+         let myPredicate = NSPredicate(format: "serviceDueDate >= %@", Date() as CVarArg)
+        
+        allVehicleView?.allVehiclesReceives(arrVehicles: ModelManager.sharedInstance.vehicalManager.getAllVehicles(predicate: myPredicate))
         
     }
     

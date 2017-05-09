@@ -16,6 +16,8 @@ class AllVehiclesCell: UITableViewCell {
     @IBOutlet weak var lblServiceDue: UILabel!
     @IBOutlet weak var lblNotes: UILabel!
     
+    @IBOutlet weak var imgVehicleType: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

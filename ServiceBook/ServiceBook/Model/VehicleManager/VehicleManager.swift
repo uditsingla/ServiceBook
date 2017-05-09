@@ -44,8 +44,8 @@ class VehicleManager: NSObject {
         
     }
     
-    func getAllVehicles() -> NSMutableArray
+    func getAllVehicles(predicate : NSPredicate?) -> NSMutableArray
     {
-        return ModelManager.sharedInstance.dbManager.getAllRecords(entityName: "Vehicle")!
+        return ModelManager.sharedInstance.dbManager.getAllRecords(entityName: "Vehicle", predicate: predicate)!
     }
 }

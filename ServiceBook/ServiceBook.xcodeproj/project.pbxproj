@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1806A8771EBB0C2A00FE02BB /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1806A8761EBB0C2A00FE02BB /* HistoryVC.swift */; };
+		182AB7241EC0388F006BC792 /* HistoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182AB7231EC0388F006BC792 /* HistoryPresenter.swift */; };
+		182AB7271EC05E6C006BC792 /* servicebook1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 182AB7261EC05E6C006BC792 /* servicebook1024.png */; };
 		184F08671EB1D49C0070F9A3 /* AllVehiclesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184F08661EB1D49C0070F9A3 /* AllVehiclesPresenter.swift */; };
 		18E10DB31EB0C3B5000B5343 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E10DB21EB0C3B5000B5343 /* AppDelegate.swift */; };
 		18E10DB51EB0C3B5000B5343 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E10DB41EB0C3B5000B5343 /* ViewController.swift */; };
@@ -35,6 +37,8 @@
 
 /* Begin PBXFileReference section */
 		1806A8761EBB0C2A00FE02BB /* HistoryVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
+		182AB7231EC0388F006BC792 /* HistoryPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryPresenter.swift; sourceTree = "<group>"; };
+		182AB7261EC05E6C006BC792 /* servicebook1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = servicebook1024.png; sourceTree = "<group>"; };
 		184F08661EB1D49C0070F9A3 /* AllVehiclesPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllVehiclesPresenter.swift; sourceTree = "<group>"; };
 		18E10DAF1EB0C3B5000B5343 /* ServiceBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ServiceBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18E10DB21EB0C3B5000B5343 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +85,14 @@
 			path = History;
 			sourceTree = "<group>";
 		};
+		182AB7251EC05E6C006BC792 /* AppIcon */ = {
+			isa = PBXGroup;
+			children = (
+				182AB7261EC05E6C006BC792 /* servicebook1024.png */,
+			);
+			path = AppIcon;
+			sourceTree = "<group>";
+		};
 		18E10DA61EB0C3B5000B5343 = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +112,7 @@
 		18E10DB11EB0C3B5000B5343 /* ServiceBook */ = {
 			isa = PBXGroup;
 			children = (
+				182AB7251EC05E6C006BC792 /* AppIcon */,
 				18E10DC71EB0C502000B5343 /* Database */,
 				18E10DCA1EB0C502000B5343 /* Interface */,
 				18E10DCC1EB0C502000B5343 /* Model */,
@@ -181,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				18E10DD61EB0C502000B5343 /* AddVehiclePresenter.swift */,
+				182AB7231EC0388F006BC792 /* HistoryPresenter.swift */,
 				184F08661EB1D49C0070F9A3 /* AllVehiclesPresenter.swift */,
 			);
 			path = Presenter;
@@ -273,7 +287,13 @@
 				TargetAttributes = {
 					18E10DAE1EB0C3B5000B5343 = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = TLVE824R46;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -301,6 +321,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18E10DC01EB0C3B5000B5343 /* LaunchScreen.storyboard in Resources */,
+				182AB7271EC05E6C006BC792 /* servicebook1024.png in Resources */,
 				18E10DBD1EB0C3B5000B5343 /* Assets.xcassets in Resources */,
 				18E10DB81EB0C3B5000B5343 /* Main.storyboard in Resources */,
 			);
@@ -324,6 +345,7 @@
 				18E10E411EB0C502000B5343 /* VehicleManager.swift in Sources */,
 				18E10E471EB0C502000B5343 /* AllVehiclesCell.swift in Sources */,
 				18E10DB51EB0C3B5000B5343 /* ViewController.swift in Sources */,
+				182AB7241EC0388F006BC792 /* HistoryPresenter.swift in Sources */,
 				18E10E3E1EB0C502000B5343 /* AuthenticationManager.swift in Sources */,
 				18E10E4A1EB0C502000B5343 /* VehicleDetailCell.swift in Sources */,
 				18E10E4F1EB0C5E2000B5343 /* AddVehicleCell.swift in Sources */,
@@ -454,7 +476,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = TLVE824R46;
 				INFOPLIST_FILE = ServiceBook/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = abhi.ServiceBook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -466,7 +490,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = TLVE824R46;
 				INFOPLIST_FILE = ServiceBook/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = abhi.ServiceBook;
 				PRODUCT_NAME = "$(TARGET_NAME)";

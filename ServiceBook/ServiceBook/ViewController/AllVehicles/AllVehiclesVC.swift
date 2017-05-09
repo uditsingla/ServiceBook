@@ -42,7 +42,7 @@ extension AllVehiclesVC : AllVehicleView
 }
 
 
-class AllVehiclesVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class AllVehiclesVC: UIViewController,UITableViewDelegate, UITableViewDataSource {
 
      let allvehiclePrsenter  = AllVehiclesPresenter()
      var arrAllVehicles =  NSMutableArray()
@@ -114,13 +114,65 @@ class AllVehiclesVC: UIViewController,UITableViewDelegate,UITableViewDataSource 
         
         let vehicleObj :  AllVehiclesI = arrAllVehicles.object(at: indexPath.row) as! AllVehiclesI
         
-        cell.lblVehicleNo.text = "Vehicle no : \(vehicleObj.vehicleNo!)"
-        cell.lblServiceDue.text = "Service due date : \(AppSharedInstance.sharedInstance.getFormattedStr(formatterType: AppSharedInstance.sharedInstance.myDateFormatter, dateObj: vehicleObj.serviceDueDate!) as String)"
-        cell.lblVehicleName.text = "Vehicle name : \(vehicleObj.vehicleName!)"
-        cell.lblVehicleType.text = vehicleObj.vehicleType!
-        cell.lblNotes.text = "Notes : \(vehicleObj.notes!)"
+        
+        
+        let attributeText = AppSharedInstance.sharedInstance.getFormattedStr(formatterType: AppSharedInstance.sharedInstance.myDateFormatter, dateObj: vehicleObj.serviceDueDate!) as String
+        let mainText = "Service Due Date : \(attributeText)"
+        let range = (mainText as NSString).range(of: attributeText)
+        let attributedString = NSMutableAttributedString(string:mainText)
+        
+        attributedString.addAttributes([NSFontAttributeName: UIFont(name: "HelveticaNeue-Italic", size: 15)!,
+                                        NSForegroundColorAttributeName: UIColor.red], range: range)
+        
+        
+        let attributeTextNotes = "\(vehicleObj.notes!.capitalized)"
+        let mainTextNotes = "Notes : \(attributeTextNotes)"
+        let rangeNotes = (mainTextNotes as NSString).range(of: attributeTextNotes)
+        let attributedStringNotes = NSMutableAttributedString(string:mainTextNotes)
+        attributedStringNotes.addAttributes([NSFontAttributeName: UIFont(name: "HelveticaNeue-Italic", size: 15)!], range:  rangeNotes)
+        
+        
+        cell.lblServiceDue.attributedText = attributedString
+        cell.lblVehicleNo.text = "Vehicle No : \(vehicleObj.vehicleNo!)"
+        cell.lblVehicleName.text = "Vehicle Name : \(vehicleObj.vehicleName!)"
+        cell.imgVehicleType.image = UIImage(named: getImage(vehicleType: (vehicleObj.vehicleType)!))
+        //cell.lblVehicleType.text = vehicleObj.vehicleType!
+        cell.lblNotes.attributedText = attributedStringNotes
         
         return cell
+        
+    }
+    
+    func getImage(vehicleType : String) -> String {
+        
+        var strImageName : String?
+        switch vehicleType
+        {
+        case "Bicycle":
+            strImageName =  "bicycle.png"
+            break
+        case "Bike":
+            strImageName = "bike.png"
+            break
+        case "Auto":
+            strImageName = "auto.png"
+            break
+        case "Car/Jeep":
+            strImageName = "car.png"
+            break
+        case "Bus/Truck":
+            strImageName =  "bus.png"
+            break
+        case "Plane":
+            strImageName =  "plane.png"
+            break
+        case "Helicopter":
+            strImageName =  "heli.png"
+            break
+        default:
+            strImageName = ""
+        }
+        return strImageName!
         
     }
     
@@ -137,6 +189,10 @@ class AllVehiclesVC: UIViewController,UITableViewDelegate,UITableViewDataSource 
         self.navigationController?.pushViewController(addVehicleVC, animated: true)
 
     }
+    
+    //MARK : UIPickerView
+    // MARK: UIPickerViewDataSource
+    
     
 
     

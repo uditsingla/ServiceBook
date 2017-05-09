@@ -56,7 +56,13 @@ extension AddVehicleVC : AddVehicleView
 
 }
 
-class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,UITextViewDelegate,UITextFieldDelegate  {
+class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,UITextViewDelegate,UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource  {
+    
+    var slectedPickerRow : Int?
+    var previousPickerRow : Int?
+    
+    @IBOutlet weak var viewPicker: UIView!
+    
     
     @IBOutlet weak var btnBack: UIButton!
     @IBOutlet weak var lblHeading: UILabel!
@@ -95,6 +101,7 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
         {            
             lblHeading.text = "Update Info"
             btnBack.isHidden = false
+            pickerDate.setDate(objVehicle.lastServiceDate!, animated: true)
         }
         else
         {
@@ -108,9 +115,23 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
         tableAddVehicle.tableFooterView = UIView()
         
         viewDatePicker.isHidden = true
+        viewPicker.isHidden = true
         
         pickerDate.addTarget(self, action: #selector(selectDate), for: UIControlEvents.valueChanged)
         //UNUserNotificationCenter.current().delegate = self
+        
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        if(!isRecordEdit)
+        {
+        objVehicle.resetData()
+        dtLastService = nil
+        tableAddVehicle.reloadData()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -137,6 +158,63 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
         self.navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func clkPickerCancel(_ sender: Any) {
+        
+        if(previousPickerRow != nil)
+        {
+            slectedPickerRow = previousPickerRow
+        }
+        
+        viewPicker.isHidden = true
+
+    }
+    
+    @IBAction func clkPickerDone(_ sender: Any) {
+        
+        if(slectedPickerRow == nil)
+        {
+            slectedPickerRow = 0
+        }
+        
+        
+        var strVehicleType : String?
+        switch slectedPickerRow! {
+        case 0:
+            strVehicleType = "Bicycle"
+            break
+        case 1:
+            strVehicleType = "Bike"
+
+            break
+        case 2:
+            strVehicleType = "Auto"
+
+            break
+        case 3:
+            strVehicleType = "Car/Jeep"
+
+            break
+        case 4:
+            strVehicleType = "Bus/Truck"
+
+            break
+        case 5:
+            strVehicleType = "Plane"
+
+            break
+        case 6:
+            strVehicleType = "Helicopter"
+
+            break
+            
+        default:
+            break
+        }
+        
+        objVehicle.vehicleType = strVehicleType!
+        viewPicker.isHidden = true
+        tableAddVehicle.reloadData()
+    }
     
     @IBAction func clkDone(_ sender: Any) {
         
@@ -144,6 +222,12 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
         
         dateFormater.dateFormat = AppSharedInstance.sharedInstance.myDateFormatter
         
+        
+        if(dtLastService == nil)
+        {
+            dtLastService = pickerDate.date
+        }
+            
         let srtDate = AppSharedInstance.sharedInstance.getFormattedStr(formatterType: AppSharedInstance.sharedInstance.myDateFormatter, dateObj: dtLastService!)        
         
         objVehicle.lastServiceDate = dateFormater.date(from: srtDate)
@@ -156,6 +240,8 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
     @IBAction func clkCancel(_ sender: Any) {
         
         viewDatePicker.isHidden = true
+        viewPicker.isHidden = true
+        
     }
     @IBAction func clkSave(_ sender: Any) {
         
@@ -192,8 +278,14 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
         }
         
         objVehicle.vehicleNo = cell.txtVehicleNo.text
-        objVehicle.notes = cell.txtNotes.text
         
+        if(cell.txtNotes.text == "Notes")
+        {
+            objVehicle.notes = "No notes available"
+        }
+        else{
+            objVehicle.notes = cell.txtNotes.text
+        }
 
         if(isRecordEdit)
         {
@@ -268,7 +360,18 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
         }
         
         cell.txtVehicleNo.text = objVehicle.vehicleNo!
-        cell.txtNotes.text = objVehicle.notes
+        
+        if(objVehicle.notes == "")
+        {
+            cell.txtNotes.text = "Notes"
+            cell.txtNotes.textColor = UIColor(red: 199.0/255.0, green: 199.0/255.0, blue: 205.0/255.0, alpha: 1)
+        }
+        else
+        {
+            cell.txtNotes.text = objVehicle.notes
+            cell.txtNotes.textColor = UIColor.black
+        }
+        
         
         return cell
         
@@ -279,11 +382,103 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
         
       
     }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int
+    {
+        return 1
+    }
+    
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 7
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 50
+    }
+    
+    
+    // MARK: - UIPickerViewDelegate
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView
+    {
+        
+        let myView = UIView.init(frame: CGRect(x : 0, y : 0, width : pickerView.bounds.width - 30, height: 60))
+        
+        let myImageView = UIImageView.init(frame: CGRect(x : self.view.frame.size.width/2 - 30, y : 0, width : 50, height: 50))
+        
+        switch row {
+        case 0:
+            myImageView.image = UIImage(named:"bicycle.png")
+        case 1:
+            myImageView.image = UIImage(named:"bike.png")
+        case 2:
+            myImageView.image = UIImage(named:"auto.png")
+        case 3:
+            myImageView.image = UIImage(named:"car.png")
+        case 4:
+            myImageView.image = UIImage(named:"bus.png")
+        case 5:
+            myImageView.image = UIImage(named:"plane.png")
+        case 6:
+            myImageView.image = UIImage(named:"heli.png")
+        default:
+            myImageView.image = nil
+        }
+        //        let myLabel = UILabel(frame: CGRectMake(60, 0, pickerView.bounds.width - 90, 60 ))
+        //        myLabel.font = UIFont(name:some font, size: 18)
+        //        myLabel.text = rowString
+        //
+        //        myView.addSubview(myLabel)
+        myView.addSubview(myImageView)
+        
+        return myView
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        
+        // do something with selected row
+        slectedPickerRow = row
+    }
 
     // MARK: - TextView delegates
+    
+    public func textViewShouldBeginEditing(_ textView: UITextView) -> Bool
+    {
+        
+        if(textView.text == "Notes")
+        {
+            textView.text = ""
+        }
+//        if(objVehicle.notes = "Notes")
+//        let indexPath = IndexPath(row: 0, section: 0)
+//        let cell : AddVehicleCell = tableAddVehicle.cellForRow(at: indexPath) as! AddVehicleCell
+//        cell.txtNotes.text = ""
+//        cell.txtNotes.textColor = UIColor.black
+        return true
+    }
+    
     func textViewDidEndEditing(_ textView: UITextView)
     {
+        if(textView.text == "")
+        {
+            textView.text = "Notes"
+        }
         textView.resignFirstResponder()
+    }
+    
+    public func textViewDidChange(_ textView: UITextView)
+    {
+        let indexPath = IndexPath(row: 0, section: 0)
+        let cell : AddVehicleCell = tableAddVehicle.cellForRow(at: indexPath) as! AddVehicleCell
+        
+        if(cell.txtNotes.text.characters.count == 0)
+        {
+            cell.txtNotes.textColor = UIColor.lightGray
+            cell.txtNotes.text = "Notes"
+            cell.txtNotes.resignFirstResponder()
+        }
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -345,16 +540,26 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
     
 func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool
 {
-    if(textField.tag ==  4)
+     if(textField.tag ==  2)
+    {
+        self.view.endEditing(true)
+        
+        viewPicker.isHidden = false
+        
+        return false
+    }
+    else if(textField.tag ==  4)
     {
         self.view.endEditing(true)
         
         viewDatePicker.isHidden = false
+        
         return false
     }
     else
     {
         viewDatePicker.isHidden = true
+        viewPicker.isHidden = true
     }
     return true
 }
@@ -365,8 +570,10 @@ func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool
         
         switch nextTage {
         case 2:
-            objVehicle.vehicleName = textField.text
-            break
+            textField.resignFirstResponder()
+            viewPicker.isHidden = false
+            return true
+            
         case 3:
              objVehicle.vehicleType = textField.text
             break
