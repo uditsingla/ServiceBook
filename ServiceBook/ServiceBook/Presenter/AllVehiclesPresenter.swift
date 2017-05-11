@@ -38,6 +38,8 @@ class AllVehiclesPresenter: NSObject {
         
         allVehicleView?.allVehiclesReceives(arrVehicles: ModelManager.sharedInstance.vehicalManager.getAllVehicles(predicate: myPredicate))
         
+        
+        
     }
     
     func deleteVehicle(vehicleID : String)  {

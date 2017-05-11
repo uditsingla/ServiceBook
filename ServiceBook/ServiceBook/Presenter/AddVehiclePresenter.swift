@@ -55,9 +55,11 @@ class AddVehiclePresenter: NSObject {
     
     func getServiceDueDate(objVehicle : AllVehiclesI) -> String {
         
-        let averageDayRun  = Float(objVehicle.serviceRequiredAfter!)/Float(objVehicle.averageRun!)
+        let averageDay = Float(objVehicle.averageRun!)/7.0
         
-        let noOfDays = Float(objVehicle.serviceRequiredAfter!)/averageDayRun
+        let noOfDays  = Float(objVehicle.serviceRequiredAfter!)/averageDay
+        
+        //let noOfDays = Float(objVehicle.serviceRequiredAfter!)/(averageDayRun *  7)
         
         let currentCalendar = NSCalendar.current
         
@@ -71,17 +73,19 @@ class AddVehiclePresenter: NSObject {
         
     }
     
-    func setLocalNotification(strUniqueID : String, notificationDate : Date)
+    func setLocalNotification(vehicleObj : AllVehiclesI, notificationDate : Date)
     {
         // Create Notification Content
         let notificationContent = UNMutableNotificationContent()
         
         
-        print("Uniuqe id : \(strUniqueID)")
+        print("Uniuqe id : \(vehicleObj.vehicleID)")
         // Configure Notification Content
-        notificationContent.title = "Service Required"
+        notificationContent.title = "\(vehicleObj.vehicleName!)'s Service Time"
         notificationContent.subtitle = "Get Ready"
-        notificationContent.body = "You should go to see a workshop"
+        notificationContent.body = "\(vehicleObj.vehicleNo!) \(vehicleObj.vehicleType!) needs to go to workshop"
+
+        notificationContent.sound = UNNotificationSound.init(named: "carsound.wav")
         
         print("\(notificationDate)")
         //let date = Date(timeIntervalSinceNow: 10)
@@ -91,12 +95,12 @@ class AddVehiclePresenter: NSObject {
         
         
         // Add Trigger W.R.T Time
-        //        let notificationTriggerTest = UNTimeIntervalNotificationTrigger(timeInterval: 10.0, repeats: false)
+              //  let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 10.0, repeats: false)
         //
         //        // Create Notification Request
         //        let notificationRequestTest = UNNotificationRequest(identifier: "cocoacasts_local_notification", content: notificationContent, trigger: notificationTriggerTest)
         
-        let notificationRequest = UNNotificationRequest(identifier: "\(strUniqueID)", content: notificationContent, trigger: notificationTrigger)
+        let notificationRequest = UNNotificationRequest(identifier: "\(vehicleObj.vehicleID)", content: notificationContent, trigger: notificationTrigger)
         // Add Request to User Notification Center
         UNUserNotificationCenter.current().add(notificationRequest) { (error) in
             if let error = error {

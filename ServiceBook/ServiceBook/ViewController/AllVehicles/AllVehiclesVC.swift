@@ -26,6 +26,8 @@ extension AllVehiclesVC : AllVehicleView
     
    func allVehiclesReceives(arrVehicles : NSMutableArray)
    {
+    
+    print("\(arrVehicles)")
     self.arrAllVehicles.removeAllObjects()
     self.arrAllVehicles.addObjects(from: arrVehicles as [AnyObject])
     tableAllVehicles.reloadData()

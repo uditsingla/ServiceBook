@@ -22,7 +22,7 @@ class AddVehicleCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
-        self.txtNotes.layer.borderWidth = 1.0
+        self.txtNotes.layer.borderWidth = 0.5
         self.txtNotes.layer.cornerRadius = 5.0
         self.txtNotes.layer.borderColor = UIColor(red: 204/255.0, green: 204/255.0, blue: 204/255.0, alpha: 1).cgColor
 

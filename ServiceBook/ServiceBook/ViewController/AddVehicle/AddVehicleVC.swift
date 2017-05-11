@@ -27,7 +27,7 @@ extension AddVehicleVC : AddVehicleView
     {
         print("Vehicle has been added succesfully")
         
-        addvehiclePrsenter.setLocalNotification(strUniqueID : strUniqueID!, notificationDate: objVehicle.serviceDueDate!)
+        addvehiclePrsenter.setLocalNotification(vehicleObj : objVehicle, notificationDate: objVehicle.serviceDueDate!)
         
         objVehicle.resetData()
         
@@ -47,7 +47,7 @@ extension AddVehicleVC : AddVehicleView
 
         
         //add New Local Notification
-         addvehiclePrsenter.setLocalNotification(strUniqueID : objVehicle.vehicleID, notificationDate: objVehicle.serviceDueDate!)
+         addvehiclePrsenter.setLocalNotification(vehicleObj : objVehicle, notificationDate: objVehicle.serviceDueDate!)
         
         self.navigationController?.popViewController(animated: true)
         
@@ -251,7 +251,7 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
         
         print(cell.txtVehicleName.text! as String)
         
-        addvehiclePrsenter.getServiceDueDate(objVehicle : objVehicle)
+        
         
         //Populate Objects
         if(!isRecordEdit)
@@ -287,6 +287,9 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
             objVehicle.notes = cell.txtNotes.text
         }
 
+        addvehiclePrsenter.getServiceDueDate(objVehicle : objVehicle)
+        print("Service Due Date : \(objVehicle.serviceDueDate)")
+        
         if(isRecordEdit)
         {
             //Edit Existing record
@@ -468,6 +471,7 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
         textView.resignFirstResponder()
     }
     
+    
     public func textViewDidChange(_ textView: UITextView)
     {
         let indexPath = IndexPath(row: 0, section: 0)
@@ -478,6 +482,10 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
             cell.txtNotes.textColor = UIColor.lightGray
             cell.txtNotes.text = "Notes"
             cell.txtNotes.resignFirstResponder()
+        }
+        else
+        {
+            cell.txtNotes.textColor = UIColor.black
         }
     }
     
