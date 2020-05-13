@@ -27,8 +27,6 @@ class AllVehiclesI: NSObject {
         self.vehicleType = ""
         self.vehicleName = ""
         self.vehicleNo = ""
-//        self.serviceRequiredAfter = 0
-//        self.averageRun = 0
         self.notes = ""
     }
     

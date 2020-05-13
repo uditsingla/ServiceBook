@@ -34,7 +34,6 @@ class HistoryPresenter: NSObject {
     
     func getAllVehicles()
     {
-        
         let myPredicate = NSPredicate(format: "serviceDueDate < %@", Date() as CVarArg)
         historyView?.allVehiclesReceives(arrVehicles: ModelManager.sharedInstance.vehicalManager.getAllVehicles(predicate: myPredicate))
     }

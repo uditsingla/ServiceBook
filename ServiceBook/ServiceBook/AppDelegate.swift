@@ -23,9 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            print("local notification data : \(application.value(forKey: "UIApplicationLaunchOptionsLocalNotificationKey"))")
 //        }
         
-        
-
-        
         // Request Notification Settings
         UNUserNotificationCenter.current().getNotificationSettings { (notificationSettings) in
             switch notificationSettings.authorizationStatus
@@ -42,6 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 break;
             case .denied:
+                print("Application Not Allowed to Display Notifications")
+            case .provisional:
                 print("Application Not Allowed to Display Notifications")
             }
         }
@@ -143,6 +142,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
 }
 

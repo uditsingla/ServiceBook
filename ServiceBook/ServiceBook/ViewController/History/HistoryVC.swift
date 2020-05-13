@@ -138,15 +138,15 @@ class HistoryVC: UIViewController, UITableViewDelegate,UITableViewDataSource {
         let mainText = "Service Date : \(attributeText)"
         let range = (mainText as NSString).range(of: attributeText)
         let attributedString = NSMutableAttributedString(string:mainText)
-        attributedString.addAttributes([NSFontAttributeName: UIFont(name: "HelveticaNeue-Italic", size: 15)!,
-                                        NSForegroundColorAttributeName: UIColor(red: 0.0/255.0, green: 149.0/255.0, blue: 157.0/255.0, alpha: 1)], range: range)
+        attributedString.addAttributes([NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Italic", size: 15)!,
+                                        NSAttributedStringKey.foregroundColor: UIColor(red: 0.0/255.0, green: 149.0/255.0, blue: 157.0/255.0, alpha: 1)], range: range)
         
         
         let attributeTextNotes = "\(vehicleObj.notes!.capitalized)"
         let mainTextNotes = "Notes : \(attributeTextNotes)"
         let rangeNotes = (mainTextNotes as NSString).range(of: attributeTextNotes)
         let attributedStringNotes = NSMutableAttributedString(string:mainTextNotes)
-        attributedStringNotes.addAttributes([NSFontAttributeName: UIFont(name: "HelveticaNeue-Italic", size: 15)!], range:  rangeNotes)
+        attributedStringNotes.addAttributes([NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Italic", size: 15)!], range:  rangeNotes)
         
         
         

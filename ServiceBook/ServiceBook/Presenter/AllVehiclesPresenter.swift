@@ -38,8 +38,6 @@ class AllVehiclesPresenter: NSObject {
         
         allVehicleView?.allVehiclesReceives(arrVehicles: ModelManager.sharedInstance.vehicalManager.getAllVehicles(predicate: myPredicate))
         
-        
-        
     }
     
     func deleteVehicle(vehicleID : String)  {
@@ -51,11 +49,19 @@ class AllVehiclesPresenter: NSObject {
         })
     }
     
-    func removeNotification(arrNotificationID : [String])
+    
+    func addNewVehicle(objVehicle : AllVehiclesI)
     {
-        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: arrNotificationID)
+        ModelManager.sharedInstance.vehicalManager.addNewVehicle(objVehicle : objVehicle, completion: {
+            success in
+            self.getAllVehicles()
+        })
     }
     
-    
-    
+    func editVehicalInfo(objVehicle : AllVehiclesI)
+    {
+        ModelManager.sharedInstance.vehicalManager.editVehicalInfo(objVehicle : objVehicle, completion: {
+            success in
+        })
+    }
 }

@@ -15,7 +15,6 @@ protocol AddVehicleView: NSObjectProtocol {
     func finishLoading()
 
     func newVehicleAdded(isSuccess : Bool)
-    
     func vehicleInfoUpdated(isSuccess : Bool)    
 }
 
@@ -36,9 +35,7 @@ class AddVehiclePresenter: NSObject {
     {
         ModelManager.sharedInstance.vehicalManager.addNewVehicle(objVehicle : objVehicle, completion: {
             success in
-            
            self.addVehicleView?.newVehicleAdded(isSuccess: true)
-            
         })
     }
     
@@ -46,72 +43,7 @@ class AddVehiclePresenter: NSObject {
     {
         ModelManager.sharedInstance.vehicalManager.editVehicalInfo(objVehicle : objVehicle, completion: {
             success in
-            
             self.addVehicleView?.vehicleInfoUpdated(isSuccess: true)
-            
         })
     }
-    
-    
-    func getServiceDueDate(objVehicle : AllVehiclesI) -> String {
-        
-        let averageDay = Float(objVehicle.averageRun!)/7.0
-        
-        let noOfDays  = Float(objVehicle.serviceRequiredAfter!)/averageDay
-        
-        //let noOfDays = Float(objVehicle.serviceRequiredAfter!)/(averageDayRun *  7)
-        
-        let currentCalendar = NSCalendar.current
-        
-        objVehicle.serviceDueDate = currentCalendar.date(byAdding: Calendar.Component.day, value: Int(noOfDays), to: objVehicle.lastServiceDate!)
-        
-        let strDueDate = AppSharedInstance.sharedInstance.getFormattedStr(formatterType: AppSharedInstance.sharedInstance.myDateFormatter, dateObj: objVehicle.serviceDueDate!)
-        
-        print("Service due on : \(strDueDate)")
-        
-        return strDueDate
-        
-    }
-    
-    func setLocalNotification(vehicleObj : AllVehiclesI, notificationDate : Date)
-    {
-        // Create Notification Content
-        let notificationContent = UNMutableNotificationContent()
-        
-        
-        print("Uniuqe id : \(vehicleObj.vehicleID)")
-        // Configure Notification Content
-        notificationContent.title = "\(vehicleObj.vehicleName!)'s Service Time"
-        notificationContent.subtitle = "Get Ready"
-        notificationContent.body = "\(vehicleObj.vehicleNo!) \(vehicleObj.vehicleType!) needs to go to workshop"
-
-        notificationContent.sound = UNNotificationSound.init(named: "carsound.wav")
-        
-        print("\(notificationDate)")
-        //let date = Date(timeIntervalSinceNow: 10)
-        let triggerDate = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second,], from: notificationDate)
-        let notificationTrigger = UNCalendarNotificationTrigger(dateMatching: triggerDate,
-                                                                repeats: false)
-        
-        
-        // Add Trigger W.R.T Time
-              //  let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 10.0, repeats: false)
-        //
-        //        // Create Notification Request
-        //        let notificationRequestTest = UNNotificationRequest(identifier: "cocoacasts_local_notification", content: notificationContent, trigger: notificationTriggerTest)
-        
-        let notificationRequest = UNNotificationRequest(identifier: "\(vehicleObj.vehicleID)", content: notificationContent, trigger: notificationTrigger)
-        // Add Request to User Notification Center
-        UNUserNotificationCenter.current().add(notificationRequest) { (error) in
-            if let error = error {
-                print("Unable to Add Notification Request (\(error), \(error.localizedDescription))")
-            }
-        }
-    }
-    
-    func removeNotification(arrNotificationID : [String])
-    {
-        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: arrNotificationID)
-    }
-    
 }

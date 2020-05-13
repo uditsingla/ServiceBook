@@ -27,7 +27,10 @@ extension AddVehicleVC : AddVehicleView
     {
         print("Vehicle has been added succesfully")
         
-        addvehiclePrsenter.setLocalNotification(vehicleObj : objVehicle, notificationDate: objVehicle.serviceDueDate!)
+        
+        AppSharedInstance.sharedInstance.setLocalNotification(vehicleObj : objVehicle, notificationDate: objVehicle.serviceDueDate!)
+        
+        //addvehiclePrsenter.setLocalNotification(vehicleObj : objVehicle, notificationDate: objVehicle.serviceDueDate!)
         
         objVehicle.resetData()
         
@@ -43,17 +46,15 @@ extension AddVehicleVC : AddVehicleView
         print("Vehicle info has been added updated succesfully")
 
         //remove Existing notification
-        addvehiclePrsenter.removeNotification(arrNotificationID: [objVehicle.vehicleID])
+        AppSharedInstance.sharedInstance.removeNotification(arrNotificationID: [objVehicle.vehicleID])
 
         
         //add New Local Notification
-         addvehiclePrsenter.setLocalNotification(vehicleObj : objVehicle, notificationDate: objVehicle.serviceDueDate!)
+         AppSharedInstance.sharedInstance.setLocalNotification(vehicleObj : objVehicle, notificationDate: objVehicle.serviceDueDate!)
         
         self.navigationController?.popViewController(animated: true)
         
     }
-    
-
 }
 
 class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,UITextViewDelegate,UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource  {
@@ -118,10 +119,21 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
         viewPicker.isHidden = true
         
         pickerDate.addTarget(self, action: #selector(selectDate), for: UIControlEvents.valueChanged)
-        //UNUserNotificationCenter.current().delegate = self
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("NotificationIdentifier"), object: nil)
 
     }
+    
+    @objc func methodOfReceivedNotification(notification: NSNotification) {
+        if let dict = notification.userInfo as NSDictionary? {
+            print("*********************************")
+            print("** ADD vehicle VC Notification **")
+            print("*********************************")
+            print(dict)
+            print("*********************************")
+            }
+        }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -141,7 +153,7 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
     
     
     // MARK: - Date Picker Delegates
-    func selectDate()
+    @objc func selectDate()
     {
         dtLastService = pickerDate.date
         print(pickerDate.date)
@@ -251,8 +263,6 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
         
         print(cell.txtVehicleName.text! as String)
         
-        
-        
         //Populate Objects
         if(!isRecordEdit)
         {
@@ -287,7 +297,7 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
             objVehicle.notes = cell.txtNotes.text
         }
 
-        addvehiclePrsenter.getServiceDueDate(objVehicle : objVehicle)
+        _ = AppSharedInstance.sharedInstance.getServiceDueDate(objVehicle : objVehicle)
         print("Service Due Date : \(objVehicle.serviceDueDate)")
         
         if(isRecordEdit)
@@ -300,7 +310,6 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
             //Add New Record
              addvehiclePrsenter.addVehicle(objVehicle: objVehicle)
         }
-       
         
     }
     
@@ -611,10 +620,7 @@ func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool
         
         if (nextResponder != nil){
             // Found next responder, so set it.
-            
                 nextResponder?.becomeFirstResponder()
-        
-            
         }
         else
         {
@@ -623,15 +629,4 @@ func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool
         }
         return false // We do not want UITextField to insert line-breaks.
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

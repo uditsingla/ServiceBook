@@ -36,7 +36,7 @@ extension AllVehiclesVC : AllVehicleView
     
     func vehicleDeleted()
     {
-        allvehiclePrsenter.removeNotification(arrNotificationID: [objVehicle.vehicleID])
+        AppSharedInstance.sharedInstance.removeNotification(arrNotificationID: [objVehicle.vehicleID])
         
         allvehiclePrsenter.getAllVehicles()
     }
@@ -60,11 +60,42 @@ class AllVehiclesVC: UIViewController,UITableViewDelegate, UITableViewDataSource
         tableAllVehicles.estimatedRowHeight = 45
         tableAllVehicles.rowHeight = UITableViewAutomaticDimension
         tableAllVehicles.tableFooterView = UIView()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("NotificationIdentifier"), object: nil)
+
     }
     
     
+    @objc func methodOfReceivedNotification(notification: NSNotification) {
+        if let dict = notification.userInfo as NSDictionary? {
+            
+            print("*********************************")
+            print("** ALL vehicle VC Notification **")
+            print("*********************************")
+            print(dict)
+            print("*********************************")
+            
+            let allVehicleObj = AllVehiclesI()
+            
+            let strDate = AppSharedInstance.sharedInstance.getServiceDueDate(objVehicle: allVehicleObj)
+            let newDueDatetObj = AppSharedInstance.sharedInstance.getFormattedDate(formatterType: AppSharedInstance.sharedInstance.myDateFormatter, stringObj: strDate)
+            
+            //allVehicleObj.vehicleID = dict["id"] as? String ?? ""
+            allVehicleObj.vehicleType = dict["type"] as? String ?? ""
+            allVehicleObj.vehicleName = dict["name"] as? String ?? ""
+            allVehicleObj.vehicleNo = dict["no"] as? String ?? ""
+            allVehicleObj.serviceRequiredAfter = dict["serviceReqAfter"] as? Int
+            allVehicleObj.averageRun = dict["averageRun"] as? Int ?? 0
+            allVehicleObj.notes = dict["notes"] as? String ?? ""
+            allVehicleObj.lastServiceDate = dict["serviceDueDate"] as? Date ?? Date()
+            allVehicleObj.serviceDueDate = newDueDatetObj
+            
+            allvehiclePrsenter.addNewVehicle(objVehicle: allVehicleObj)
+            
+            }
+        }
+    
     override func viewWillAppear(_ animated: Bool) {
-        
         allvehiclePrsenter.getAllVehicles()
     }
 
@@ -73,12 +104,12 @@ class AllVehiclesVC: UIViewController,UITableViewDelegate, UITableViewDataSource
         // Dispose of any resources that can be recreated.
     }
     
+    
+    
     // MARK: - Table View Delegates
     func numberOfSections(in tableView: UITableView) -> Int
     {
-        
         return 1
-        
     }
     
     func tableView(_ tableView:UITableView, numberOfRowsInSection section:Int) -> Int
@@ -123,15 +154,15 @@ class AllVehiclesVC: UIViewController,UITableViewDelegate, UITableViewDataSource
         let range = (mainText as NSString).range(of: attributeText)
         let attributedString = NSMutableAttributedString(string:mainText)
         
-        attributedString.addAttributes([NSFontAttributeName: UIFont(name: "HelveticaNeue-Italic", size: 15)!,
-                                        NSForegroundColorAttributeName: UIColor.red], range: range)
+        attributedString.addAttributes([NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Italic", size: 15)!,
+                                        NSAttributedStringKey.foregroundColor: UIColor.red], range: range)
         
         
         let attributeTextNotes = "\(vehicleObj.notes!.capitalized)"
         let mainTextNotes = "Notes : \(attributeTextNotes)"
         let rangeNotes = (mainTextNotes as NSString).range(of: attributeTextNotes)
         let attributedStringNotes = NSMutableAttributedString(string:mainTextNotes)
-        attributedStringNotes.addAttributes([NSFontAttributeName: UIFont(name: "HelveticaNeue-Italic", size: 15)!], range:  rangeNotes)
+        attributedStringNotes.addAttributes([NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Italic", size: 15)!], range:  rangeNotes)
         
         
         cell.lblServiceDue.attributedText = attributedString
