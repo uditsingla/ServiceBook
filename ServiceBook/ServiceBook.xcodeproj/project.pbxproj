@@ -18,8 +18,6 @@
 		18E10DBB1EB0C3B5000B5343 /* ServiceBook.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18E10DB91EB0C3B5000B5343 /* ServiceBook.xcdatamodeld */; };
 		18E10DBD1EB0C3B5000B5343 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18E10DBC1EB0C3B5000B5343 /* Assets.xcassets */; };
 		18E10DC01EB0C3B5000B5343 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18E10DBE1EB0C3B5000B5343 /* LaunchScreen.storyboard */; };
-		18E10E3B1EB0C502000B5343 /* Vehicle+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E10DC81EB0C502000B5343 /* Vehicle+CoreDataClass.swift */; };
-		18E10E3C1EB0C502000B5343 /* Vehicle+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E10DC91EB0C502000B5343 /* Vehicle+CoreDataProperties.swift */; };
 		18E10E3D1EB0C502000B5343 /* AllVehiclesI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E10DCB1EB0C502000B5343 /* AllVehiclesI.swift */; };
 		18E10E3E1EB0C502000B5343 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E10DCE1EB0C502000B5343 /* AuthenticationManager.swift */; };
 		18E10E3F1EB0C502000B5343 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E10DD01EB0C502000B5343 /* DatabaseManager.swift */; };
@@ -34,6 +32,8 @@
 		18E10E4B1EB0C502000B5343 /* VehicleDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E10E3A1EB0C502000B5343 /* VehicleDetailVC.swift */; };
 		18E10E4F1EB0C5E2000B5343 /* AddVehicleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E10E4D1EB0C5E2000B5343 /* AddVehicleCell.swift */; };
 		18E10E501EB0C5E2000B5343 /* AddVehicleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E10E4E1EB0C5E2000B5343 /* AddVehicleVC.swift */; };
+		D2320CE3246D2CA8009B4011 /* Vehicle+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2320CE1246D2CA8009B4011 /* Vehicle+CoreDataClass.swift */; };
+		D2320CE4246D2CA8009B4011 /* Vehicle+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2320CE2246D2CA8009B4011 /* Vehicle+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,8 +50,6 @@
 		18E10DBC1EB0C3B5000B5343 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18E10DBF1EB0C3B5000B5343 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18E10DC11EB0C3B5000B5343 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		18E10DC81EB0C502000B5343 /* Vehicle+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Vehicle+CoreDataClass.swift"; sourceTree = "<group>"; };
-		18E10DC91EB0C502000B5343 /* Vehicle+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Vehicle+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		18E10DCB1EB0C502000B5343 /* AllVehiclesI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllVehiclesI.swift; sourceTree = "<group>"; };
 		18E10DCE1EB0C502000B5343 /* AuthenticationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		18E10DD01EB0C502000B5343 /* DatabaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
@@ -66,6 +64,8 @@
 		18E10E3A1EB0C502000B5343 /* VehicleDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleDetailVC.swift; sourceTree = "<group>"; };
 		18E10E4D1EB0C5E2000B5343 /* AddVehicleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddVehicleCell.swift; sourceTree = "<group>"; };
 		18E10E4E1EB0C5E2000B5343 /* AddVehicleVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddVehicleVC.swift; sourceTree = "<group>"; };
+		D2320CE1246D2CA8009B4011 /* Vehicle+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Vehicle+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D2320CE2246D2CA8009B4011 /* Vehicle+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Vehicle+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,8 +144,8 @@
 		18E10DC71EB0C502000B5343 /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				18E10DC81EB0C502000B5343 /* Vehicle+CoreDataClass.swift */,
-				18E10DC91EB0C502000B5343 /* Vehicle+CoreDataProperties.swift */,
+				D2320CE1246D2CA8009B4011 /* Vehicle+CoreDataClass.swift */,
+				D2320CE2246D2CA8009B4011 /* Vehicle+CoreDataProperties.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -298,7 +298,7 @@
 				TargetAttributes = {
 					18E10DAE1EB0C3B5000B5343 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = 7D26B82743;
+						DevelopmentTeam = TF33GCC9NB;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -353,6 +353,7 @@
 				18E10E501EB0C5E2000B5343 /* AddVehicleVC.swift in Sources */,
 				18E10E481EB0C502000B5343 /* AllVehiclesVC.swift in Sources */,
 				18E10E491EB0C502000B5343 /* LoginVC.swift in Sources */,
+				D2320CE4246D2CA8009B4011 /* Vehicle+CoreDataProperties.swift in Sources */,
 				18E10E4B1EB0C502000B5343 /* VehicleDetailVC.swift in Sources */,
 				1806A8771EBB0C2A00FE02BB /* HistoryVC.swift in Sources */,
 				18E10E411EB0C502000B5343 /* VehicleManager.swift in Sources */,
@@ -362,11 +363,10 @@
 				18E10E3E1EB0C502000B5343 /* AuthenticationManager.swift in Sources */,
 				18E10E4A1EB0C502000B5343 /* VehicleDetailCell.swift in Sources */,
 				18E10E4F1EB0C5E2000B5343 /* AddVehicleCell.swift in Sources */,
+				D2320CE3246D2CA8009B4011 /* Vehicle+CoreDataClass.swift in Sources */,
 				18E10E3D1EB0C502000B5343 /* AllVehiclesI.swift in Sources */,
 				18E10E401EB0C502000B5343 /* ModelManager.swift in Sources */,
 				18E10E431EB0C502000B5343 /* AppSharedInstance.swift in Sources */,
-				18E10E3C1EB0C502000B5343 /* Vehicle+CoreDataProperties.swift in Sources */,
-				18E10E3B1EB0C502000B5343 /* Vehicle+CoreDataClass.swift in Sources */,
 				18E10E421EB0C502000B5343 /* AddVehiclePresenter.swift in Sources */,
 				18E10DB31EB0C3B5000B5343 /* AppDelegate.swift in Sources */,
 			);
@@ -495,16 +495,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Cory Allison (J923WC24GL)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Cory Allison (J923WC24GL)";
-				DEVELOPMENT_TEAM = 7D26B82743;
+				CODE_SIGN_IDENTITY = "Apple Development: Brett Carrier (7PGDD2VLG3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: Brett Carrier (7PGDD2VLG3)";
+				DEVELOPMENT_TEAM = TF33GCC9NB;
 				INFOPLIST_FILE = ServiceBook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.rezli.Rezli;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bcarrier.visitorsapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "20666c41-7f8c-41df-94f8-069822d0c8f9";
-				PROVISIONING_PROFILE_SPECIFIER = RezliDevelopment;
+				PROVISIONING_PROFILE_SPECIFIER = Development;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -513,16 +513,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Cory Allison (J923WC24GL)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Cory Allison (J923WC24GL)";
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "Apple Distribution: Visitor Bay Inc. (TF33GCC9NB)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Visitor Bay Inc. (TF33GCC9NB)";
+				DEVELOPMENT_TEAM = TF33GCC9NB;
 				INFOPLIST_FILE = ServiceBook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.rezli.Rezli;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bcarrier.visitorsapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = Distribution;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
