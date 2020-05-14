@@ -27,11 +27,10 @@ extension AddVehicleVC : AddVehicleView
     {
         print("Vehicle has been added succesfully")
         
+
         
         AppSharedInstance.sharedInstance.setLocalNotification(vehicleObj : objVehicle, notificationDate: objVehicle.serviceDueDate!)
-        
-        //addvehiclePrsenter.setLocalNotification(vehicleObj : objVehicle, notificationDate: objVehicle.serviceDueDate!)
-        
+                
         objVehicle.resetData()
         
         dtLastService = nil
@@ -89,6 +88,9 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
     var dictData  = NSMutableDictionary()
     
     var strUniqueID : String?
+    
+    var gadgetToUpdate: Gadget?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -158,10 +160,6 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
         dtLastService = pickerDate.date
         print(pickerDate.date)
     }
-    
-    // MARK: - Custom Functions
-    
-    
     
     //MARK: - Clk Functions
 

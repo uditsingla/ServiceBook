@@ -50,6 +50,10 @@ class AllVehiclesVC: UIViewController,UITableViewDelegate, UITableViewDataSource
      var arrAllVehicles =  NSMutableArray()
     var objVehicle : AllVehiclesI = AllVehiclesI()
     
+    
+    var gadgets = [Gadget]()
+    var gadgetToUpdate: Gadget?
+
     @IBOutlet weak var tableAllVehicles: UITableView!
     override func viewDidLoad() {
         
@@ -62,7 +66,15 @@ class AllVehiclesVC: UIViewController,UITableViewDelegate, UITableViewDataSource
         tableAllVehicles.tableFooterView = UIView()
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("NotificationIdentifier"), object: nil)
-
+        
+        //print("Date is : %@",AppSharedInstance.sharedInstance.getReadableDateFromTimeStamp(timeStamp: 1860172200))
+    }
+    
+    func getAllRecords(){
+        FIRFireStoreService.shared.read(from: .gadgets, returning: Gadget.self) { (gags) in
+            self.gadgets = gags
+            print(self.gadgets.count)
+        }
     }
     
     
@@ -97,6 +109,7 @@ class AllVehiclesVC: UIViewController,UITableViewDelegate, UITableViewDataSource
     
     override func viewWillAppear(_ animated: Bool) {
         allvehiclePrsenter.getAllVehicles()
+        getAllRecords()
     }
 
     override func didReceiveMemoryWarning() {
@@ -114,7 +127,7 @@ class AllVehiclesVC: UIViewController,UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView:UITableView, numberOfRowsInSection section:Int) -> Int
     {
-        return arrAllVehicles.count
+        return gadgets.count
         
     }
     
@@ -124,21 +137,8 @@ class AllVehiclesVC: UIViewController,UITableViewDelegate, UITableViewDataSource
             print("\(indexPath.row)")
             objVehicle = arrAllVehicles.object(at: indexPath.row) as! AllVehiclesI
             allvehiclePrsenter.deleteVehicle(vehicleID: objVehicle.vehicleID)
-            //tableAllVehicles.deleteRows(at: [indexPath], with: .fade)
         }
     }
-    
-    //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
-    //    {
-    //        return UITableViewAutomaticDimension;
-    //    }
-    //
-    //
-    //    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat
-    //    {
-    //        return UITableViewAutomaticDimension;
-    //    }
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
@@ -146,7 +146,6 @@ class AllVehiclesVC: UIViewController,UITableViewDelegate, UITableViewDataSource
         let cell = tableView.dequeueReusableCell(withIdentifier: "AllVehiclesCell", for: indexPath) as! AllVehiclesCell
         
         let vehicleObj :  AllVehiclesI = arrAllVehicles.object(at: indexPath.row) as! AllVehiclesI
-        
         
         
         let attributeText = AppSharedInstance.sharedInstance.getFormattedStr(formatterType: AppSharedInstance.sharedInstance.myDateFormatter, dateObj: vehicleObj.serviceDueDate!) as String
@@ -218,6 +217,8 @@ class AllVehiclesVC: UIViewController,UITableViewDelegate, UITableViewDataSource
         
         addVehicleVC.objVehicle = vehicleObj
         addVehicleVC.isRecordEdit = true
+        addVehicleVC.gadgetToUpdate = gadgetToUpdate
+        
         
         self.navigationController?.pushViewController(addVehicleVC, animated: true)
 

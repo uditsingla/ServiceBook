@@ -21,7 +21,6 @@ protocol AddVehicleView: NSObjectProtocol {
 class AddVehiclePresenter: NSObject {
     
     weak fileprivate var addVehicleView : AddVehicleView?
-
     
     func attachView(_ view : AddVehicleView){
         addVehicleView = view
@@ -35,7 +34,13 @@ class AddVehiclePresenter: NSObject {
     {
         ModelManager.sharedInstance.vehicalManager.addNewVehicle(objVehicle : objVehicle, completion: {
             success in
-           self.addVehicleView?.newVehicleAdded(isSuccess: true)
+            
+            //Save record on Server
+            self.addNewRecordOnFirebase(isNewRecord: true, objVehicle: objVehicle)
+
+            self.addVehicleView?.newVehicleAdded(isSuccess: true)
+
+
         })
     }
     
@@ -43,7 +48,29 @@ class AddVehiclePresenter: NSObject {
     {
         ModelManager.sharedInstance.vehicalManager.editVehicalInfo(objVehicle : objVehicle, completion: {
             success in
+            
+            self.addNewRecordOnFirebase(isNewRecord: false, objVehicle: objVehicle)
+            
             self.addVehicleView?.vehicleInfoUpdated(isSuccess: true)
         })
+    }
+    
+    
+    func addNewRecordOnFirebase(isNewRecord: Bool, objVehicle : AllVehiclesI) {
+        //save data in DB on Server
+        if isNewRecord {
+            let gadgetInfo = Gadget.init(name: objVehicle.vehicleName ?? "",
+                                       type: objVehicle.vehicleType ?? "",
+                                       number: objVehicle.vehicleNo ?? "",
+                                       notes: objVehicle.notes ?? "",
+                                       serviceRequiredAfter: objVehicle.serviceRequiredAfter ?? 0,
+                                       averageRun: objVehicle.averageRun ?? 0,
+                                       lastServiceDate: objVehicle.lastServiceDate!.timeIntervalSince1970,
+                                       serviceDueDate: objVehicle.serviceDueDate!.timeIntervalSince1970)
+            FIRFireStoreService.shared.create(for: gadgetInfo, in: .gadgets)
+
+        } else {
+            //FIRFireStoreService.shared.update(for: gadgetToUpdate!, in: .gadgets)
+        }
     }
 }

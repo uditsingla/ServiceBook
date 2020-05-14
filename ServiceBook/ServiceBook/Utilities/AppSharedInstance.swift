@@ -168,4 +168,11 @@ class AppSharedInstance: NSObject {
         return dateFormatter.date(from: OfDate) ?? Date()
     }
     
+    func getReadableDateFromTimeStamp(timeStamp: TimeInterval, formatterType: String? = "dd MMM yyyy") -> String? {
+        let date = Date(timeIntervalSince1970: timeStamp)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = formatterType
+        return dateFormatter.string(from: date)
+    }
+    
 }
