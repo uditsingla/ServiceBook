@@ -86,6 +86,10 @@ class AddVehicleVC: UIViewController  {
         }
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+          return .lightContent
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -166,6 +170,8 @@ class AddVehicleVC: UIViewController  {
             strVehicleType = "Helicopter"
             
             break
+        case 7:
+            strVehicleType = "Other"
             
         default:
             break
@@ -317,12 +323,13 @@ extension AddVehicleVC: UITableViewDelegate, UITableViewDataSource {
         if(objVehicle.notes == "")
         {
             cell.txtNotes.text = "Notes"
-            cell.txtNotes.textColor = UIColor(red: 199.0/255.0, green: 199.0/255.0, blue: 205.0/255.0, alpha: 1)
+            cell.txtNotes.font = UIFont(name: "HelveticaNeue-Italic", size: 15)
         }
         else
         {
             cell.txtNotes.text = objVehicle.notes
-            cell.txtNotes.textColor = UIColor.black
+            cell.txtNotes.font = UIFont(name: "HelveticaNeue", size: 15)
+
         }
         
         return cell
@@ -341,7 +348,7 @@ extension AddVehicleVC: UIPickerViewDelegate, UIPickerViewDataSource {
     
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 7
+        return 8
     }
     
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
@@ -373,6 +380,8 @@ extension AddVehicleVC: UIPickerViewDelegate, UIPickerViewDataSource {
             myImageView.image = UIImage(named:"plane.png")
         case 6:
             myImageView.image = UIImage(named:"heli.png")
+        case 7:
+            myImageView.image = UIImage(named:"other.png")
         default:
             myImageView.image = nil
         }
@@ -425,13 +434,13 @@ extension AddVehicleVC: UITextViewDelegate {
         
         if(cell.txtNotes.text.characters.count == 0)
         {
-            cell.txtNotes.textColor = UIColor.lightGray
             cell.txtNotes.text = "Notes"
+            cell.txtNotes.font = UIFont(name: "HelveticaNeue-Italic", size: 15)
             cell.txtNotes.resignFirstResponder()
         }
         else
         {
-            cell.txtNotes.textColor = UIColor.black
+            cell.txtNotes.font = UIFont(name: "HelveticaNeue", size: 15)
         }
     }
     

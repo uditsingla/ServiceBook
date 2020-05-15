@@ -66,6 +66,9 @@ class HistoryVC: UIViewController, UITableViewDelegate,UITableViewDataSource {
         // Dispose of any resources that can be recreated.
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+          return .lightContent
+    }
     // MARK: - Custom Functions
     
     func getImage(vehicleType : String) -> String {

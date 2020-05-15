@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         printFonts()
         
-        
+        UIApplication.shared.statusBarStyle = .lightContent
       
         return true
     }

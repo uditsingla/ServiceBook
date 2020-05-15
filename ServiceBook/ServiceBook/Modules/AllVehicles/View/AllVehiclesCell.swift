@@ -78,8 +78,10 @@ class AllVehiclesCell: UITableViewCell {
         case "Helicopter":
             strImageName =  "heli.png"
             break
+        case "Other":
+            strImageName = "other.png"
         default:
-            strImageName = ""
+            strImageName = "other.png"
         }
         return strImageName!
     }

@@ -41,6 +41,7 @@
 		D2320D04246D3CDF009B4011 /* SnapshotExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2320D02246D3CDF009B4011 /* SnapshotExtension.swift */; };
 		D2320D0A246D3D2C009B4011 /* FIRFireStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2320D09246D3D2C009B4011 /* FIRFireStoreService.swift */; };
 		D2320D0C246D3DB9009B4011 /* Gadgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2320D0B246D3DB9009B4011 /* Gadgets.swift */; };
+		D2320D1D246EB025009B4011 /* ExtensionFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2320D1C246EB025009B4011 /* ExtensionFile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +83,7 @@
 		D2320D02246D3CDF009B4011 /* SnapshotExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotExtension.swift; sourceTree = "<group>"; };
 		D2320D09246D3D2C009B4011 /* FIRFireStoreService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FIRFireStoreService.swift; sourceTree = "<group>"; };
 		D2320D0B246D3DB9009B4011 /* Gadgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gadgets.swift; sourceTree = "<group>"; };
+		D2320D1C246EB025009B4011 /* ExtensionFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionFile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 		18E10DB11EB0C3B5000B5343 /* ServiceBook */ = {
 			isa = PBXGroup;
 			children = (
+				D2320D1B246EB007009B4011 /* Extensions */,
 				D2320D0D246EA8E5009B4011 /* Modules */,
 				D2320CEC246D38B7009B4011 /* FirebaseIntegration */,
 				18B606811EC31E32005AB60D /* Resources */,
@@ -396,6 +399,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		D2320D1B246EB007009B4011 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D2320D1C246EB025009B4011 /* ExtensionFile.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		E26F2A443542B3A3A0FF462B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -562,6 +573,7 @@
 				D2320D0C246D3DB9009B4011 /* Gadgets.swift in Sources */,
 				D2320CFF246D3CB9009B4011 /* FIRCollectionReference.swift in Sources */,
 				D2320D03246D3CDF009B4011 /* EncodableExtension.swift in Sources */,
+				D2320D1D246EB025009B4011 /* ExtensionFile.swift in Sources */,
 				182AB7241EC0388F006BC792 /* HistoryPresenter.swift in Sources */,
 				18E10E3E1EB0C502000B5343 /* AuthenticationManager.swift in Sources */,
 				18E10E4A1EB0C502000B5343 /* VehicleDetailCell.swift in Sources */,

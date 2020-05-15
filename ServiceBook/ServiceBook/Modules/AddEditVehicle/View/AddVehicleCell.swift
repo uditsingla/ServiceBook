@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 class AddVehicleCell: UITableViewCell {
 
     @IBOutlet weak var txtVehicleName: UITextField!
@@ -22,16 +21,16 @@ class AddVehicleCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
-        self.txtNotes.layer.borderWidth = 0.5
-        self.txtNotes.layer.cornerRadius = 5.0
-        self.txtNotes.layer.borderColor = UIColor(red: 204/255.0, green: 204/255.0, blue: 204/255.0, alpha: 1).cgColor
+        self.txtNotes.layer.borderWidth = 0.6
+        self.txtNotes.layer.cornerRadius = 4.0
+        self.txtNotes.layer.borderColor = UIColor.darkGray.cgColor
+        self.txtNotes.textColor = UIColor.darkGray
+        self.txtNotes.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 5)
 
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }
