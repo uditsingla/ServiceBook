@@ -96,14 +96,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1806A8751EBB0C0900FE02BB /* History */ = {
-			isa = PBXGroup;
-			children = (
-				1806A8761EBB0C2A00FE02BB /* HistoryVC.swift */,
-			);
-			path = History;
-			sourceTree = "<group>";
-		};
 		182AB7251EC05E6C006BC792 /* AppIcon */ = {
 			isa = PBXGroup;
 			children = (
@@ -141,14 +133,13 @@
 		18E10DB11EB0C3B5000B5343 /* ServiceBook */ = {
 			isa = PBXGroup;
 			children = (
+				D2320D0D246EA8E5009B4011 /* Modules */,
 				D2320CEC246D38B7009B4011 /* FirebaseIntegration */,
-				D2320CE9246D36E1009B4011 /* FirebaseResources */,
 				18B606811EC31E32005AB60D /* Resources */,
 				182AB7251EC05E6C006BC792 /* AppIcon */,
-				18E10DC71EB0C502000B5343 /* Database */,
+				18E10DC71EB0C502000B5343 /* LocalDatabase */,
 				18E10DCA1EB0C502000B5343 /* Interface */,
 				18E10DCC1EB0C502000B5343 /* Model */,
-				18E10DD51EB0C502000B5343 /* Presenter */,
 				18E10DD71EB0C502000B5343 /* Utilities */,
 				18E10DD91EB0C502000B5343 /* ViewController */,
 				18E10DB21EB0C3B5000B5343 /* AppDelegate.swift */,
@@ -162,13 +153,13 @@
 			path = ServiceBook;
 			sourceTree = "<group>";
 		};
-		18E10DC71EB0C502000B5343 /* Database */ = {
+		18E10DC71EB0C502000B5343 /* LocalDatabase */ = {
 			isa = PBXGroup;
 			children = (
 				D2320CE1246D2CA8009B4011 /* Vehicle+CoreDataClass.swift */,
 				D2320CE2246D2CA8009B4011 /* Vehicle+CoreDataProperties.swift */,
 			);
-			path = Database;
+			path = LocalDatabase;
 			sourceTree = "<group>";
 		};
 		18E10DCA1EB0C502000B5343 /* Interface */ = {
@@ -222,16 +213,6 @@
 			path = VehicleManager;
 			sourceTree = "<group>";
 		};
-		18E10DD51EB0C502000B5343 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				18E10DD61EB0C502000B5343 /* AddVehiclePresenter.swift */,
-				182AB7231EC0388F006BC792 /* HistoryPresenter.swift */,
-				184F08661EB1D49C0070F9A3 /* AllVehiclesPresenter.swift */,
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
 		18E10DD71EB0C502000B5343 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -243,22 +224,10 @@
 		18E10DD91EB0C502000B5343 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				1806A8751EBB0C0900FE02BB /* History */,
-				18E10E4C1EB0C5E2000B5343 /* AddVehicle */,
-				18E10E331EB0C502000B5343 /* AllVehicles */,
 				18E10E361EB0C502000B5343 /* LoginVC */,
 				18E10E381EB0C502000B5343 /* VehicleDetail */,
 			);
 			path = ViewController;
-			sourceTree = "<group>";
-		};
-		18E10E331EB0C502000B5343 /* AllVehicles */ = {
-			isa = PBXGroup;
-			children = (
-				18E10E351EB0C502000B5343 /* AllVehiclesVC.swift */,
-				18E10E341EB0C502000B5343 /* AllVehiclesCell.swift */,
-			);
-			path = AllVehicles;
 			sourceTree = "<group>";
 		};
 		18E10E361EB0C502000B5343 /* LoginVC */ = {
@@ -276,15 +245,6 @@
 				18E10E3A1EB0C502000B5343 /* VehicleDetailVC.swift */,
 			);
 			path = VehicleDetail;
-			sourceTree = "<group>";
-		};
-		18E10E4C1EB0C5E2000B5343 /* AddVehicle */ = {
-			isa = PBXGroup;
-			children = (
-				18E10E4E1EB0C5E2000B5343 /* AddVehicleVC.swift */,
-				18E10E4D1EB0C5E2000B5343 /* AddVehicleCell.swift */,
-			);
-			path = AddVehicle;
 			sourceTree = "<group>";
 		};
 		B110F21BB18B66F4C15147DA /* Pods */ = {
@@ -307,6 +267,7 @@
 		D2320CEC246D38B7009B4011 /* FirebaseIntegration */ = {
 			isa = PBXGroup;
 			children = (
+				D2320CE9246D36E1009B4011 /* FirebaseResources */,
 				D2320D08246D3D1B009B4011 /* Service */,
 				D2320D05246D3CF1009B4011 /* Model */,
 				D2320D00246D3CCB009B4011 /* Extentions */,
@@ -346,6 +307,93 @@
 				D2320D09246D3D2C009B4011 /* FIRFireStoreService.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		D2320D0D246EA8E5009B4011 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				D2320D10246EA8F6009B4011 /* AllVehicles */,
+				D2320D0F246EA8F2009B4011 /* AddEditVehicle */,
+				D2320D0E246EA8ED009B4011 /* HistoryBook */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		D2320D0E246EA8ED009B4011 /* HistoryBook */ = {
+			isa = PBXGroup;
+			children = (
+				D2320D16246EA967009B4011 /* View */,
+				D2320D13246EA952009B4011 /* Presenter */,
+			);
+			path = HistoryBook;
+			sourceTree = "<group>";
+		};
+		D2320D0F246EA8F2009B4011 /* AddEditVehicle */ = {
+			isa = PBXGroup;
+			children = (
+				D2320D15246EA962009B4011 /* View */,
+				D2320D12246EA949009B4011 /* Presenter */,
+			);
+			path = AddEditVehicle;
+			sourceTree = "<group>";
+		};
+		D2320D10246EA8F6009B4011 /* AllVehicles */ = {
+			isa = PBXGroup;
+			children = (
+				D2320D14246EA95A009B4011 /* View */,
+				D2320D11246EA935009B4011 /* Presenter */,
+			);
+			path = AllVehicles;
+			sourceTree = "<group>";
+		};
+		D2320D11246EA935009B4011 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				184F08661EB1D49C0070F9A3 /* AllVehiclesPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		D2320D12246EA949009B4011 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				18E10DD61EB0C502000B5343 /* AddVehiclePresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		D2320D13246EA952009B4011 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				182AB7231EC0388F006BC792 /* HistoryPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		D2320D14246EA95A009B4011 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				18E10E351EB0C502000B5343 /* AllVehiclesVC.swift */,
+				18E10E341EB0C502000B5343 /* AllVehiclesCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D2320D15246EA962009B4011 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				18E10E4E1EB0C5E2000B5343 /* AddVehicleVC.swift */,
+				18E10E4D1EB0C5E2000B5343 /* AddVehicleCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D2320D16246EA967009B4011 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1806A8761EBB0C2A00FE02BB /* HistoryVC.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		E26F2A443542B3A3A0FF462B /* Frameworks */ = {
