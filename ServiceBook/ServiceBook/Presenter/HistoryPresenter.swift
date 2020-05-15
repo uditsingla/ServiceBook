@@ -14,15 +14,15 @@ protocol HistoryView: NSObjectProtocol {
     func finishLoading()
     
     func allVehiclesReceives(arrVehicles : NSMutableArray)
-
+    
     func vehicleDeleted()
 }
 
 
 class HistoryPresenter: NSObject {
-
     
-     weak fileprivate var historyView : HistoryView?
+    
+    weak fileprivate var historyView : HistoryView?
     
     func attachView(_ view : HistoryView){
         historyView = view

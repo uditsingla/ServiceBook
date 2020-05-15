@@ -13,7 +13,7 @@ protocol AddVehicleView: NSObjectProtocol {
     
     func startLoading()
     func finishLoading()
-
+    
     func newVehicleAdded(isSuccess : Bool)
     func vehicleInfoUpdated(isSuccess : Bool)    
 }
@@ -36,41 +36,54 @@ class AddVehiclePresenter: NSObject {
             success in
             
             //Save record on Server
-            self.addNewRecordOnFirebase(isNewRecord: true, objVehicle: objVehicle)
-
+            self.addNewRecordOnFirebase(objVehicle: objVehicle)
+            
             self.addVehicleView?.newVehicleAdded(isSuccess: true)
-
-
+            
         })
     }
     
-    func editVehicalInfo(objVehicle : AllVehiclesI)
+    func editVehicalInfo(objVehicle : AllVehiclesI, gadgetObj: Gadget)
     {
         ModelManager.sharedInstance.vehicalManager.editVehicalInfo(objVehicle : objVehicle, completion: {
             success in
             
-            self.addNewRecordOnFirebase(isNewRecord: false, objVehicle: objVehicle)
+            self.updateRecordOnServer(gadgetObj: gadgetObj, objVehicle: objVehicle)
             
             self.addVehicleView?.vehicleInfoUpdated(isSuccess: true)
         })
     }
     
     
-    func addNewRecordOnFirebase(isNewRecord: Bool, objVehicle : AllVehiclesI) {
+    // MARK: - Firebase Interaction
+    func addNewRecordOnFirebase(objVehicle : AllVehiclesI) {
         //save data in DB on Server
-        if isNewRecord {
-            let gadgetInfo = Gadget.init(name: objVehicle.vehicleName ?? "",
-                                       type: objVehicle.vehicleType ?? "",
-                                       number: objVehicle.vehicleNo ?? "",
-                                       notes: objVehicle.notes ?? "",
-                                       serviceRequiredAfter: objVehicle.serviceRequiredAfter ?? 0,
-                                       averageRun: objVehicle.averageRun ?? 0,
-                                       lastServiceDate: objVehicle.lastServiceDate!.timeIntervalSince1970,
-                                       serviceDueDate: objVehicle.serviceDueDate!.timeIntervalSince1970)
-            FIRFireStoreService.shared.create(for: gadgetInfo, in: .gadgets)
-
-        } else {
-            //FIRFireStoreService.shared.update(for: gadgetToUpdate!, in: .gadgets)
-        }
+        //FIRFireStoreService.shared.update(for: gadgetToUpdate!, in: .gadgets)
+        let gadgetInfo = Gadget.init(name: objVehicle.vehicleName ?? "",
+                                     type: objVehicle.vehicleType ?? "",
+                                     number: objVehicle.vehicleNo ?? "",
+                                     notes: objVehicle.notes ?? "",
+                                     serviceRequiredAfter: objVehicle.serviceRequiredAfter ?? 0,
+                                     averageRun: objVehicle.averageRun ?? 0,
+                                     lastServiceDate: objVehicle.lastServiceDate!.timeIntervalSince1970,
+                                     serviceDueDate: objVehicle.serviceDueDate!.timeIntervalSince1970)
+        FIRFireStoreService.shared.create(for: gadgetInfo, in: .gadgets)
+        
+    }
+    
+    func updateRecordOnServer(gadgetObj: Gadget, objVehicle : AllVehiclesI) {
+        
+        var gadgetObjToUpdate = gadgetObj
+        gadgetObjToUpdate.vehicleName = objVehicle.vehicleName
+        gadgetObjToUpdate.vehicleType = objVehicle.vehicleType ?? ""
+        gadgetObjToUpdate.vehicleNo = objVehicle.vehicleNo ?? ""
+        gadgetObjToUpdate.notes = objVehicle.notes ?? ""
+        gadgetObjToUpdate.serviceRequiredAfter = objVehicle.serviceRequiredAfter ?? 0
+        gadgetObjToUpdate.averageRun = objVehicle.averageRun ?? 0
+        gadgetObjToUpdate.lastServiceDate = objVehicle.lastServiceDate!.timeIntervalSince1970
+        gadgetObjToUpdate.serviceDueDate = objVehicle.serviceDueDate!.timeIntervalSince1970
+        
+        FIRFireStoreService.shared.update(for: gadgetObjToUpdate, in: .gadgets)
     }
 }
+

@@ -8,70 +8,18 @@
 
 import UIKit
 
-
-extension AddVehicleVC : AddVehicleView
-{
-    func startLoading()
-    {
-//        let loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
-//        loadingNotification.mode = MBProgressHUDMode.indeterminate
-//        loadingNotification.label.text = "Loading"
-    }
-    func finishLoading()
-    {
-//        MBProgressHUD.hide(for: self.view, animated: true)
-        
-    }
+class AddVehicleVC: UIViewController  {
     
-    func newVehicleAdded(isSuccess : Bool)
-    {
-        print("Vehicle has been added succesfully")
-        
-
-        
-        AppSharedInstance.sharedInstance.setLocalNotification(vehicleObj : objVehicle, notificationDate: objVehicle.serviceDueDate!)
-                
-        objVehicle.resetData()
-        
-        dtLastService = nil
-        
-        tableAddVehicle.reloadData()
-        
-        
-    }
-    
-    func vehicleInfoUpdated(isSuccess : Bool)
-    {
-        print("Vehicle info has been added updated succesfully")
-
-        //remove Existing notification
-        AppSharedInstance.sharedInstance.removeNotification(arrNotificationID: [objVehicle.vehicleID])
-
-        
-        //add New Local Notification
-         AppSharedInstance.sharedInstance.setLocalNotification(vehicleObj : objVehicle, notificationDate: objVehicle.serviceDueDate!)
-        
-        self.navigationController?.popViewController(animated: true)
-        
-    }
-}
-
-class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,UITextViewDelegate,UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource  {
-    
+    // MARK: - Local Variables & Props
     var slectedPickerRow : Int?
     var previousPickerRow : Int?
     
     @IBOutlet weak var viewPicker: UIView!
-    
-    
     @IBOutlet weak var btnBack: UIButton!
     @IBOutlet weak var lblHeading: UILabel!
     @IBOutlet weak var contraintTopViewHeight: NSLayoutConstraint!
-    
-     @IBOutlet weak var viewTopBar: UIView!
-    
+    @IBOutlet weak var viewTopBar: UIView!
     @IBOutlet weak var viewDatePicker: UIView!
-    
     @IBOutlet weak var pickerDate: UIDatePicker!
     
     var isRecordEdit : Bool = false
@@ -80,7 +28,7 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
     //var dtServiceDueDate : Date?
     
     var objVehicle : AllVehiclesI = AllVehiclesI()
-
+    
     let addvehiclePrsenter  = AddVehiclePresenter()
     
     @IBOutlet weak var tableAddVehicle: UITableView!
@@ -90,8 +38,9 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
     var strUniqueID : String?
     
     var gadgetToUpdate: Gadget?
-
     
+    
+    // MARK: - Default Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -123,9 +72,28 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
         pickerDate.addTarget(self, action: #selector(selectDate), for: UIControlEvents.valueChanged)
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.methodOfReceivedNotification(notification:)), name: Notification.Name("NotificationIdentifier"), object: nil)
-
+        
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        if(!isRecordEdit)
+        {
+            objVehicle.resetData()
+            dtLastService = nil
+            tableAddVehicle.reloadData()
+        }
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    
+    // MARK: - NSNotification Observer
+
     @objc func methodOfReceivedNotification(notification: NSNotification) {
         if let dict = notification.userInfo as NSDictionary? {
             print("*********************************")
@@ -133,26 +101,8 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
             print("*********************************")
             print(dict)
             print("*********************************")
-            }
-        }
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        
-        if(!isRecordEdit)
-        {
-        objVehicle.resetData()
-        dtLastService = nil
-        tableAddVehicle.reloadData()
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     
     // MARK: - Date Picker Delegates
     @objc func selectDate()
@@ -162,7 +112,7 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
     }
     
     //MARK: - Clk Functions
-
+    
     @IBAction func clkBack(_ sender: Any)
     {
         self.navigationController?.popViewController(animated: true)
@@ -176,7 +126,7 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
         }
         
         viewPicker.isHidden = true
-
+        
     }
     
     @IBAction func clkPickerDone(_ sender: Any) {
@@ -194,27 +144,27 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
             break
         case 1:
             strVehicleType = "Bike"
-
+            
             break
         case 2:
             strVehicleType = "Auto"
-
+            
             break
         case 3:
             strVehicleType = "Car/Jeep"
-
+            
             break
         case 4:
             strVehicleType = "Bus/Truck"
-
+            
             break
         case 5:
             strVehicleType = "Plane"
-
+            
             break
         case 6:
             strVehicleType = "Helicopter"
-
+            
             break
             
         default:
@@ -237,7 +187,7 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
         {
             dtLastService = pickerDate.date
         }
-            
+        
         let srtDate = AppSharedInstance.sharedInstance.getFormattedStr(formatterType: AppSharedInstance.sharedInstance.myDateFormatter, dateObj: dtLastService!)        
         
         objVehicle.lastServiceDate = dateFormater.date(from: srtDate)
@@ -255,7 +205,7 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
     }
     @IBAction func clkSave(_ sender: Any) {
         
-//        let indexPath = NSIndexPath(forRow:0, inSection:0)
+        //        let indexPath = NSIndexPath(forRow:0, inSection:0)
         let indexPath = IndexPath(row: 0, section: 0)
         let cell : AddVehicleCell = tableAddVehicle.cellForRow(at: indexPath) as! AddVehicleCell
         
@@ -268,9 +218,7 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
             objVehicle.vehicleID = strUniqueID!
         }
         
-        
         // print("Uniuqe id : \(strUniqueID!)")
-        
         
         objVehicle.vehicleName = cell.txtVehicleName.text
         objVehicle.vehicleType = cell.txtVehicleType.text
@@ -294,42 +242,37 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
         else{
             objVehicle.notes = cell.txtNotes.text
         }
-
+        
         _ = AppSharedInstance.sharedInstance.getServiceDueDate(objVehicle : objVehicle)
         print("Service Due Date : \(objVehicle.serviceDueDate)")
         
         if(isRecordEdit)
         {
             //Edit Existing record
-            addvehiclePrsenter.editVehicalInfo(objVehicle : objVehicle)
+            addvehiclePrsenter.editVehicalInfo(objVehicle: objVehicle, gadgetObj: self.gadgetToUpdate!)
         }
         else
         {
             //Add New Record
-             addvehiclePrsenter.addVehicle(objVehicle: objVehicle)
+            addvehiclePrsenter.addVehicle(objVehicle: objVehicle)
         }
         
     }
     
-    
-    
-     // MARK: - Table View Delegates
-    func numberOfSections(in tableView: UITableView) -> Int
-    {
-        return 1
-    }
+}
+
+// MARK: - Table View Delegates
+extension AddVehicleVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView:UITableView, numberOfRowsInSection section:Int) -> Int
     {
         return 1
     }
-           
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "AddVehicleCell", for: indexPath) as! AddVehicleCell
-        
-        
         
         cell.txtVehicleName.text = objVehicle.vehicleName!
         cell.txtVehicleType.text = objVehicle.vehicleType!
@@ -337,7 +280,7 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
         
         if(objVehicle.serviceRequiredAfter != nil)
         {
-        cell.txtServiceRequired.text = objVehicle.serviceRequiredAfter!.description
+            cell.txtServiceRequired.text = objVehicle.serviceRequiredAfter!.description
         }
         else
         {
@@ -362,7 +305,7 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
         
         if(objVehicle.averageRun != nil)
         {
-        cell.txtWeeklyRun.text = objVehicle.averageRun!.description
+            cell.txtWeeklyRun.text = objVehicle.averageRun!.description
         }
         else
         {
@@ -382,16 +325,14 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
             cell.txtNotes.textColor = UIColor.black
         }
         
-        
         return cell
-        
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
-    {
-        
-      
-    }
+}
+
+// MARK: - UIPickerView Delegates
+extension AddVehicleVC: UIPickerViewDelegate, UIPickerViewDataSource {
+    
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int
     {
@@ -408,7 +349,7 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
     }
     
     
-    // MARK: - UIPickerViewDelegate
+    
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView
     {
@@ -446,26 +387,24 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
-        
         // do something with selected row
         slectedPickerRow = row
     }
-
-    // MARK: - TextView delegates
+}
+// MARK: - TextView delegates
+extension AddVehicleVC: UITextViewDelegate {
     
     public func textViewShouldBeginEditing(_ textView: UITextView) -> Bool
     {
-        
         if(textView.text == "Notes")
         {
             textView.text = ""
         }
-//        if(objVehicle.notes = "Notes")
-//        let indexPath = IndexPath(row: 0, section: 0)
-//        let cell : AddVehicleCell = tableAddVehicle.cellForRow(at: indexPath) as! AddVehicleCell
-//        cell.txtNotes.text = ""
-//        cell.txtNotes.textColor = UIColor.black
+        //        if(objVehicle.notes = "Notes")
+        //        let indexPath = IndexPath(row: 0, section: 0)
+        //        let cell : AddVehicleCell = tableAddVehicle.cellForRow(at: indexPath) as! AddVehicleCell
+        //        cell.txtNotes.text = ""
+        //        cell.txtNotes.textColor = UIColor.black
         return true
     }
     
@@ -506,15 +445,18 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
         return true
     }
     
-    // MARK: - TextField delegates
+}
+
+// MARK: - TextField delegates
+extension AddVehicleVC: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
         if(textField.tag == 4)
         {
-           self.view.endEditing(true)
+            self.view.endEditing(true)
             
-           viewDatePicker.isHidden = false
+            viewDatePicker.isHidden = false
         }
         else
         {
@@ -533,12 +475,12 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
             objVehicle.vehicleType = textField.text
             break
         case 3:
-
+            
             if let myNumber = NumberFormatter().number(from: textField.text!) {
                 objVehicle.serviceRequiredAfter = myNumber.intValue
             }
             break
-
+            
             
         case 5:
             if let myNumber = NumberFormatter().number(from: textField.text!) {
@@ -553,31 +495,31 @@ class AddVehicleVC: UIViewController,UITableViewDelegate,UITableViewDataSource,U
         }
     }
     
-func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool
-{
-     if(textField.tag ==  2)
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool
     {
-        self.view.endEditing(true)
-        
-        viewPicker.isHidden = false
-        
-        return false
+        if(textField.tag ==  2)
+        {
+            self.view.endEditing(true)
+            
+            viewPicker.isHidden = false
+            
+            return false
+        }
+        else if(textField.tag ==  4)
+        {
+            self.view.endEditing(true)
+            
+            viewDatePicker.isHidden = false
+            
+            return false
+        }
+        else
+        {
+            viewDatePicker.isHidden = true
+            viewPicker.isHidden = true
+        }
+        return true
     }
-    else if(textField.tag ==  4)
-    {
-        self.view.endEditing(true)
-        
-        viewDatePicker.isHidden = false
-        
-        return false
-    }
-    else
-    {
-        viewDatePicker.isHidden = true
-        viewPicker.isHidden = true
-    }
-    return true
-}
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
@@ -590,13 +532,13 @@ func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool
             return true
             
         case 3:
-             objVehicle.vehicleType = textField.text
+            objVehicle.vehicleType = textField.text
             break
         case 4:
             textField.resignFirstResponder()
             viewDatePicker.isHidden = false
             if let myNumber = NumberFormatter().number(from: textField.text!) {
-             objVehicle.serviceRequiredAfter = myNumber.intValue
+                objVehicle.serviceRequiredAfter = myNumber.intValue
             }
             return true
             
@@ -606,7 +548,7 @@ func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool
             }
             break
         case 7:
-             objVehicle.vehicleNo = textField.text
+            objVehicle.vehicleNo = textField.text
             break
         default: break
             
@@ -618,7 +560,7 @@ func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool
         
         if (nextResponder != nil){
             // Found next responder, so set it.
-                nextResponder?.becomeFirstResponder()
+            nextResponder?.becomeFirstResponder()
         }
         else
         {
@@ -626,5 +568,53 @@ func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool
             textField.resignFirstResponder()
         }
         return false // We do not want UITextField to insert line-breaks.
+    }
+}
+
+// MARK: - View delegates
+extension AddVehicleVC : AddVehicleView
+{
+    func startLoading()
+    {
+        //        let loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
+        //        loadingNotification.mode = MBProgressHUDMode.indeterminate
+        //        loadingNotification.label.text = "Loading"
+    }
+    func finishLoading()
+    {
+        //        MBProgressHUD.hide(for: self.view, animated: true)
+        
+    }
+    
+    func newVehicleAdded(isSuccess : Bool)
+    {
+        print("Vehicle has been added succesfully")
+        
+        
+        
+        AppSharedInstance.sharedInstance.setLocalNotification(vehicleObj : objVehicle, notificationDate: objVehicle.serviceDueDate!)
+        
+        objVehicle.resetData()
+        
+        dtLastService = nil
+        
+        tableAddVehicle.reloadData()
+        
+        
+    }
+    
+    func vehicleInfoUpdated(isSuccess : Bool)
+    {
+        print("Vehicle info has been added updated succesfully")
+        
+        //remove Existing notification
+        AppSharedInstance.sharedInstance.removeNotification(arrNotificationID: [objVehicle.vehicleID])
+        
+        
+        //add New Local Notification
+        AppSharedInstance.sharedInstance.setLocalNotification(vehicleObj : objVehicle, notificationDate: objVehicle.serviceDueDate!)
+        
+        self.navigationController?.popViewController(animated: true)
+        
     }
 }
